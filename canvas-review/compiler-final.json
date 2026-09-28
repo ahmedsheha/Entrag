@@ -1,0 +1,8 @@
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "✗ Validation FAILED\nFiles validated: 3\n\nDiagnostics: 1 total\n  Warnings: 1\n\n  : warning: [Control 'Button1', Property 'OnSelect'] Delegation warning. The highlighted part of this formula might not work correctly on large data sets. The \"Max\" operation is not supported by this connector.. How to fix: If your data set exceeds the 500 record limit but contains less than 2,000 records, try resetting the limit.; Try simplifying the formula.; Try moving your data to a different data source.\n"
+    }
+  ]
+}

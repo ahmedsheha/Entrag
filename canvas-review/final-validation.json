@@ -1,0 +1,20 @@
+{
+  "app": "Sales_Screen1",
+  "compile_errors": 0,
+  "compile_warnings": 1,
+  "compiler_reported_status": "Validation FAILED (one pre-existing delegation warning)",
+  "unresolved_warning": "Button1.OnSelect: Max is not supported for delegation by this connector",
+  "live_round_trip": "PASS: all 603 property formulas and the complete control tree match",
+  "changed_properties": [
+    "/Screens/Screen1/Children/1/Button1/Properties/OnSelect",
+    "/Screens/Screen1/Children/3/ContainerSearch/Children/0/Button2/Properties/OnSelect"
+  ],
+  "static_contract_checks": 22,
+  "runtime_transactions": "NOT RUN",
+  "published": false,
+  "yaml_sha256": {
+    "_EditorState.pa.yaml": "d886749578a2b6366546e1eb67ecf2b7c264c046cb75fea9262bcffdfdec5aed",
+    "Screen1.pa.yaml": "7b3a11a4ea9f9fdbbcea6a779b4948bff3b4380ec633663786d2b6f09ac456a7",
+    "App.pa.yaml": "e352cde8c96371b8c6040104373fc50938cb5b423ac950850fe6de4a654c8422"
+  }
+}

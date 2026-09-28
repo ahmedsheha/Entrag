@@ -1,0 +1,12 @@
+{
+  "controls": 50,
+  "changed_properties": [
+    "Button1.OnSelect"
+  ],
+  "patch_payload_and_targets_unchanged": true,
+  "email_arguments_unchanged": true,
+  "validation_unchanged": true,
+  "failure_retains_form": true,
+  "server_roundtrip_exact_match": true,
+  "result": "PASS"
+}

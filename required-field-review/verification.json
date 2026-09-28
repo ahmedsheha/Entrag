@@ -1,0 +1,31 @@
+{
+  "result": "PASS",
+  "original_controls": 44,
+  "new_labels": [
+    "lblReqApplication",
+    "lblReqBU",
+    "lblReqDiscount",
+    "lblReqEndUser",
+    "lblReqOrderValue",
+    "lblReqProjectName"
+  ],
+  "changed_existing_properties": [
+    "BU.HoverBorderColor",
+    "BU.BorderColor",
+    "DataCardValue10.HoverBorderColor",
+    "DataCardValue10.BorderColor",
+    "DataCardValue15.HoverBorderColor",
+    "DataCardValue15.BorderColor",
+    "Application.HoverBorderColor",
+    "Application.BorderColor",
+    "ComboBox1.HoverBorderColor",
+    "ComboBox1.BorderColor",
+    "ProjName.HoverBorderColor",
+    "ProjName.BorderColor",
+    "Button1.OnSelect",
+    "btnModeNew.OnSelect",
+    "btnModeExist.OnSelect",
+    "Button4.OnSelect"
+  ],
+  "business_formulas_equivalent_after_removing_feedback_flag": true
+}

@@ -1,0 +1,95 @@
+{
+  "kind": "Static structural conformance, not runtime execution",
+  "passed": 22,
+  "checks": [
+    {
+      "check": "Six-field new-only validation and invalid-submit message are identical",
+      "result": "PASS"
+    },
+    {
+      "check": "Timestamp expression preserved once, global replaced by local scope",
+      "result": "PASS"
+    },
+    {
+      "check": "Sequence aggregation and fallback unchanged",
+      "result": "PASS"
+    },
+    {
+      "check": "Sequence query remains create-only",
+      "result": "PASS"
+    },
+    {
+      "check": "Same two Patch branches and base-record expressions",
+      "result": "PASS"
+    },
+    {
+      "check": "All 18 create fields and value expressions preserved",
+      "result": "PASS"
+    },
+    {
+      "check": "All 16 update fields preserved; quote/customer/unrelated fields still omitted",
+      "result": "PASS"
+    },
+    {
+      "check": "Email recipient, subject, body, and options unchanged",
+      "result": "PASS"
+    },
+    {
+      "check": "One create-only email after Patch; none on update branch",
+      "result": "PASS"
+    },
+    {
+      "check": "Refresh, cleanup, reset pulse, and success notification order unchanged",
+      "result": "PASS"
+    },
+    {
+      "check": "SubmissionTime and submission names do not collide with controls",
+      "result": "PASS"
+    },
+    {
+      "check": "Search refresh remains before empty-selection guard",
+      "result": "PASS"
+    },
+    {
+      "check": "Empty search guard and notification unchanged",
+      "result": "PASS"
+    },
+    {
+      "check": "All three LookUp source/predicate pairs unchanged and in same priority order",
+      "result": "PASS"
+    },
+    {
+      "check": "Quote/project/PO conditions unchanged, including all multi-selection combinations",
+      "result": "PASS"
+    },
+    {
+      "check": "Selected lookup result assigned without changing branch 1",
+      "result": "PASS"
+    },
+    {
+      "check": "Selected lookup result assigned without changing branch 2",
+      "result": "PASS"
+    },
+    {
+      "check": "Selected lookup result assigned without changing branch 3",
+      "result": "PASS"
+    },
+    {
+      "check": "Found/not-found behavior and messages unchanged",
+      "result": "PASS"
+    },
+    {
+      "check": "Exactly one selected-record assignment plus the existing visibility assignment",
+      "result": "PASS"
+    },
+    {
+      "check": "Obsolete block comments and their stale references removed from both events",
+      "result": "PASS"
+    },
+    {
+      "check": "All other controls and properties unchanged",
+      "result": "PASS"
+    }
+  ],
+  "runtime_mutations": "NOT RUN"
+}

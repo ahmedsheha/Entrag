@@ -1,0 +1,1028 @@
+Screens:
+  Screen1:
+    Properties:
+      Fill: =
+      LoadingSpinnerColor: =RGBA(56, 96, 178, 1)
+      OnVisible: |
+        =// Initialize the variables to hide forms/searches and show ONLY the landing buttons
+        UpdateContext({
+            varShowSearch: false,   // Controls the 3-dropdown search bar
+            varShowForm: false,     // Controls the main data entry form
+            varIsNewMode: false,    // Tracks if we are creating or updating
+            varCurrentRecord: Blank(),
+            varResetControls: false,
+            varSubmitAttempted: false
+        })
+    Children:
+      - Container1:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            Height: =568
+            RadiusBottomLeft: =8
+            RadiusBottomRight: =8
+            RadiusTopLeft: =8
+            RadiusTopRight: =8
+            Visible: =varShowForm
+            Width: =1303
+            X: =30
+            Y: =If(varIsNewMode, 100, 190)
+          Children:
+            - BU:
+                Control: Classic/DropDown
+                Properties:
+                  BorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(BU.Selected.BU), RGBA(184,0,0,1), RGBA(0, 18, 107, 1))
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =varCurrentRecord.BU
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(BU.Selected.BU), RGBA(184,0,0,1), ColorFade(Self.BorderColor, 15%))
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Table7
+                  Items.Value: =BU
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =13
+                  Width: =350
+                  X: =40
+                  Y: =130
+            - BUCardKey1:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: |-
+                    ="BU
+                    "
+                  Width: =35
+                  Wrap: =false
+                  X: =40
+                  Y: =103
+            - Dropdown2:
+                Control: Classic/DropDown
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =varCurrentRecord.Sub_BU
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Table8
+                  Items.Value: =SubBU
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =14
+                  Width: =350
+                  X: =455
+                  Y: =130
+            - SubBu:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: |-
+                    ="Sub BU
+                    "
+                  Width: =98
+                  Wrap: =false
+                  X: =455
+                  Y: =103
+            - DataCardValue10:
+                Control: Classic/TextInput
+                Properties:
+                  BorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(DataCardValue10.Text), RGBA(184,0,0,1), Blank())
+                  Default: =varCurrentRecord.'Order Value'
+                  DelayOutput: =true
+                  DisplayMode: =Parent.DisplayMode
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(DataCardValue10.Text), RGBA(184,0,0,1), RGBA(0, 18, 107, 1))
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  PaddingLeft: =5
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Reset: =varResetControls
+                  TabIndex: =17
+                  Tooltip: =
+                  Width: =350
+                  X: =455
+                  Y: =215
+            - Order Value:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =29
+                  Text: ="Order Value"
+                  Width: =136
+                  Wrap: =false
+                  X: =455
+                  Y: =187
+            - DataCardValue15:
+                Control: Classic/TextInput
+                Properties:
+                  BorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(DataCardValue15.Text), RGBA(184,0,0,1), Blank())
+                  Default: =varCurrentRecord.Discount
+                  DelayOutput: =true
+                  DisplayMode: =
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(DataCardValue15.Text), RGBA(184,0,0,1), RGBA(56, 96, 178, 1))
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  PaddingLeft: =5
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Reset: =varResetControls
+                  TabIndex: =18
+                  Tooltip: =
+                  Width: =350
+                  X: =870
+                  Y: =215
+            - Discount:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Discount"
+                  Width: =161
+                  Wrap: =false
+                  X: =870
+                  Y: =187
+            - Dropdown3:
+                Control: Classic/DropDown
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =varCurrentRecord.'Book Period'
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Table3
+                  Items.Value: =BookPeriod
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =15
+                  Width: =350
+                  X: =870
+                  Y: =130
+            - Book Period_DC:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Book Period"
+                  Width: =118
+                  Wrap: =false
+                  X: =870
+                  Y: =103
+            - Prob:
+                Control: Classic/DropDown
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =varCurrentRecord.'Prob %'
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Table6
+                  Items.Value: =Prob
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =16
+                  Width: =350
+                  X: =40
+                  Y: =215
+            - Prob_DC:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Prob %"
+                  Width: =98
+                  Wrap: =false
+                  X: =40
+                  Y: =187
+            - Dropdown6:
+                Control: Classic/DropDown
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =varCurrentRecord.'Specs or Model'
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Table14
+                  Items.Value: =Specs or Model
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =21
+                  Width: =350
+                  X: =870
+                  Y: =300
+            - Specs or ModelDataCar:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Specs or Model"
+                  Width: =156
+                  Wrap: =false
+                  X: =870
+                  Y: =272
+            - Sales Recommendation:
+                Control: Classic/DropDown
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =varCurrentRecord.'Scope Of Supply Sales Recommendation'
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Table12
+                  Items.Value: =Scope Of Supply
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =22
+                  Width: =350
+                  X: =40
+                  Y: =385
+            - Scope Of Supply Sales Recommendation:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Scope Of Supply Sales Recommendation"
+                  Width: =344
+                  Wrap: =false
+                  X: =40
+                  Y: =357
+            - DataCardValue14:
+                Control: Classic/TextInput
+                Properties:
+                  Align: =Align.Justify
+                  BorderColor: =
+                  Default: =varCurrentRecord.'Scope of Supply Details'
+                  DelayOutput: =true
+                  DisplayMode: =Parent.DisplayMode
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =RGBA(0, 18, 107, 1)
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  PaddingLeft: =5
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Reset: =varResetControls
+                  TabIndex: =23
+                  Tooltip: =
+                  Width: =350
+                  X: =455
+                  Y: =385
+            - Scope of Supply DetailsDC:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Scope of Supply Details"
+                  Width: =214
+                  Wrap: =false
+                  X: =455
+                  Y: =357
+            - Application:
+                Control: Classic/TextInput
+                Properties:
+                  BorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(Application.Text), RGBA(184,0,0,1), Blank())
+                  Default: =varCurrentRecord.Application
+                  DelayOutput: =true
+                  DisplayMode: =Parent.DisplayMode
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(Application.Text), RGBA(184,0,0,1), RGBA(0, 18, 107, 1))
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  PaddingLeft: =5
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Reset: =varResetControls
+                  TabIndex: =19
+                  Tooltip: =
+                  Width: =350
+                  X: =40
+                  Y: =300
+            - Application_DataCardk:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Application (TSF)"
+                  Width: =158
+                  Wrap: =false
+                  X: =40
+                  Y: =272
+            - ComboBox1_1:
+                Control: Classic/ComboBox
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  DefaultSelectedItems: |
+                    =If(
+                        tglSyncCustomer.Value,
+                        // When Toggle is ON: Sync immediately with whatever is chosen in End User ComboBox (ComboBox1)
+                        ComboBox1.SelectedItems,
+
+                        // When Toggle is OFF: Pull normal saved record data or leave blank for new entry
+                        If(
+                            IsBlank(varCurrentRecord), 
+                            Blank(), 
+                            // For Excel tables, format the saved value into a clean table structure matching the 'CutomerName' column schema
+                            [{CutomerName: varCurrentRecord.'Customer Name'}]
+                        )
+                    )
+                  DisplayFields: =["CutomerName"]
+                  DisplayMode: =If(tglSyncCustomer.Value, DisplayMode.Disabled, DisplayMode.Edit)
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  InputTextPlaceholder: =
+                  Items: =Table2
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SearchFields: =["Account  Manger"]
+                  SelectMultiple: =false
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =12
+                  Width: =350
+                  X: =870
+                  Y: =45
+            - EndUser_1:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Live: ="Customer Name"
+                  Text: ="Customer Name"
+                  Width: =296
+                  Wrap: =false
+                  X: =870
+                  Y: =17
+            - Dropdown1:
+                Control: Classic/DropDown
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  Default: =varCurrentRecord.'Lead Type'
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Items: =Table13
+                  Items.Value: =Lead Type
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =20
+                  Width: =350
+                  X: =455
+                  Y: =300
+            - Lead Type_DataCard1k:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Lead Type"
+                  Width: =108
+                  Wrap: =false
+                  X: =455
+                  Y: =272
+            - ComboBox1:
+                Control: Classic/ComboBox
+                Properties:
+                  BorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(ComboBox1.Selected.CutomerName), RGBA(184,0,0,1), RGBA(0, 18, 107, 1))
+                  HoverBorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(ComboBox1.Selected.CutomerName), RGBA(184,0,0,1), ColorFade(Self.BorderColor, 15%))
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  DefaultSelectedItems: |-
+                    =If(IsBlank(varCurrentRecord), Blank(), {CutomerName: varCurrentRecord.EndUser_Name})
+                  DisplayFields: =["CutomerName"]
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  InputTextPlaceholder: =
+                  Items: =Table2
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =varResetControls
+                  SearchFields: =["CutomerName"]
+                  SelectMultiple: =false
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =11
+                  Width: =350
+                  X: =455
+                  Y: =45
+            - EndUser:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="End User Name"
+                  Width: =149
+                  Wrap: =false
+                  X: =455
+                  Y: =17
+            - ProjName:
+                Control: Classic/TextInput
+                Properties:
+                  BorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(ProjName.Text), RGBA(184,0,0,1), Blank())
+                  Default: =varCurrentRecord.Project_Name
+                  DelayOutput: =true
+                  DisplayMode: =Parent.DisplayMode
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =If(varIsNewMode && varSubmitAttempted && IsBlank(ProjName.Text), RGBA(184,0,0,1), RGBA(0, 18, 107, 1))
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  PaddingLeft: =5
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Reset: =varResetControls
+                  TabIndex: =10
+                  Tooltip: =
+                  Width: =350
+                  X: =40
+                  Y: =45
+            - ProjName Value_1:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Project Name"
+                  Width: =120
+                  Wrap: =false
+                  X: =40
+                  Y: =17
+            - ComD:
+                Control: Classic/TextInput
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Default: =varCurrentRecord.'Commercial Contact'
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =RGBA(0, 18, 107, 1)
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Reset: =varResetControls
+                  TabIndex: =25
+                  Width: =350
+                  X: =870
+                  Y: =470
+            - ComDC:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Commerical Contact"
+                  Width: =196
+                  Wrap: =false
+                  X: =870
+                  Y: =442
+            - TechD:
+                Control: Classic/TextInput
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Default: =varCurrentRecord.'Technical Contact'
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =RGBA(0, 18, 107, 1)
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  Reset: =varResetControls
+                  TabIndex: =24
+                  Width: =350
+                  X: =870
+                  Y: =385
+            - TechDc:
+                Control: Label
+                Properties:
+                  BorderColor: =RGBA(0, 0, 0, 1)
+                  Color: =RGBA(0, 18, 107, 1)
+                  Font: =Font.'Open Sans'
+                  Height: =28
+                  Text: ="Technical Contact"
+                  Width: =161
+                  Wrap: =false
+                  X: =870
+                  Y: =357
+            - tglSyncCustomer:
+                Control: Classic/Toggle
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  Default: =true
+                  FalseText: =
+                  Font: =Font.'Open Sans'
+                  Height: =18
+                  Reset: =varResetControls
+                  TrueFill: =RGBA(56, 96, 178, 1)
+                  TrueText: =
+                  Width: =75
+                  X: =1022
+                  Y: =22
+            - lblReqProjectName:
+                Control: Label
+                Properties:
+                  Color: =RGBA(184,0,0,1)
+                  Fill: =RGBA(0,0,0,0)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: ='ProjName Value_1'.Height
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  TabIndex: =-1
+                  Text: ="*"
+                  Visible: =varIsNewMode && IsBlank(ProjName.Text)
+                  Width: =18
+                  Wrap: =false
+                  X: ='ProjName Value_1'.X + 'ProjName Value_1'.Width + 2
+                  Y: ='ProjName Value_1'.Y
+            - lblReqApplication:
+                Control: Label
+                Properties:
+                  Color: =RGBA(184,0,0,1)
+                  Fill: =RGBA(0,0,0,0)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: =Application_DataCardk.Height
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  TabIndex: =-1
+                  Text: ="*"
+                  Visible: =varIsNewMode && IsBlank(Application.Text)
+                  Width: =18
+                  Wrap: =false
+                  X: =Application_DataCardk.X + Application_DataCardk.Width + 2
+                  Y: =Application_DataCardk.Y
+            - lblReqBU:
+                Control: Label
+                Properties:
+                  Color: =RGBA(184,0,0,1)
+                  Fill: =RGBA(0,0,0,0)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: =BUCardKey1.Height - 1
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  TabIndex: =-1
+                  Text: ="*"
+                  Visible: =varIsNewMode && IsBlank(BU.Selected.BU)
+                  Width: =18
+                  Wrap: =false
+                  X: =BUCardKey1.X + BUCardKey1.Width + 2
+                  Y: =BUCardKey1.Y
+            - lblReqEndUser:
+                Control: Label
+                Properties:
+                  Color: =RGBA(184,0,0,1)
+                  Fill: =RGBA(0,0,0,0)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: =EndUser.Height
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  TabIndex: =-1
+                  Text: ="*"
+                  Visible: =varIsNewMode && IsBlank(ComboBox1.Selected.CutomerName)
+                  Width: =18
+                  Wrap: =false
+                  X: =EndUser.X + EndUser.Width + 2
+                  Y: =EndUser.Y
+            - lblReqOrderValue:
+                Control: Label
+                Properties:
+                  Color: =RGBA(184,0,0,1)
+                  Fill: =RGBA(0,0,0,0)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: ='Order Value'.Height - 1
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  TabIndex: =-1
+                  Text: ="*"
+                  Visible: =varIsNewMode && IsBlank(DataCardValue10.Text)
+                  Width: =18
+                  Wrap: =false
+                  X: ='Order Value'.X + 'Order Value'.Width + 2
+                  Y: ='Order Value'.Y
+            - lblReqDiscount:
+                Control: Label
+                Properties:
+                  Color: =RGBA(184,0,0,1)
+                  Fill: =RGBA(0,0,0,0)
+                  Font: =Font.'Open Sans'
+                  FontWeight: =FontWeight.Bold
+                  Height: =Discount.Height
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Size: =14
+                  TabIndex: =-1
+                  Text: ="*"
+                  Visible: =varIsNewMode && IsBlank(DataCardValue15.Text)
+                  Width: =18
+                  Wrap: =false
+                  X: =Discount.X + Discount.Width + 2
+                  Y: =Discount.Y
+      - Button1:
+          Control: Classic/Button
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Font: =Font.'Open Sans'
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            OnSelect: |-
+              =If(
+                  // 1. VALIDATION
+                  varIsNewMode && (
+                      IsBlank(ProjName.Text) || IsBlank(Application.Text) ||
+                      IsBlank(BU.Selected.BU) || IsBlank(ComboBox1.Selected.CutomerName) ||
+                      IsBlank(DataCardValue10.Text) || IsBlank(DataCardValue15.Text)
+                  ),
+
+                  UpdateContext({varSubmitAttempted: true});
+                  Notify("Please fill in all required fields marked with an asterisk (*) before submitting.", NotificationType.Error),
+
+                  // Keep timestamp and payload local to this submission.
+                  With(
+                      { submissionTime: DateAdd(Now(), 3, TimeUnit.Hours), isNewSubmission: varIsNewMode },
+                      With(
+                          // Preserve create-only sequence calculation before reading the payload.
+                          { NextNumber: If(isNewSubmission, Coalesce(Max(SalesTracker, Quote_Seq), 400) + 1) },
+                          With(
+                              { submission: {
+                                  Opportunity_date: submissionTime,
+                                  Project_Name: ProjName.Text,
+                                  Application: Application.Text,
+                                  BU: BU.Selected.BU,
+                                  EndUser_Name: ComboBox1.Selected.CutomerName,
+                                  Sub_BU: Dropdown2.Selected.SubBU,
+                                  'Prob %': Prob.Selected.Prob,
+                                  'Scope Of Supply Sales Recommendation': 'Sales Recommendation'.Selected.'Scope Of Supply',
+                                  'Scope of Supply Details': DataCardValue14.Text,
+                                  'Specs or Model': Dropdown6.Selected.'Specs or Model',
+                                  'Order Value': DataCardValue10.Text,
+                                  'Book Period': Dropdown3.Selected.BookPeriod,
+                                  Discount: DataCardValue15.Text,
+                                  'Lead Type': Dropdown1.Selected.'Lead Type',
+                                  'Technical Contact': TechD.Text,
+                                  'Commercial Contact': ComD.Text
+                              } },
+                              If(
+                                  isNewSubmission,
+                                  Patch(
+                                      SalesTracker, Defaults(SalesTracker),
+                                      { Quote_No: "MSOL26" & NextNumber, Quote_Seq: NextNumber },
+                                      submission
+                                  );
+                                  Office365Outlook.SendEmailV2(
+                                      "michael.waffai@entrag.com",
+                                      "New Opportunity Submitted: " & ProjName.Text,
+                                      "Hello,<br><br>A new opportunity has just been submitted via the Sales Tracker App. Here are the details:<br><br><b>Quote Number:</b> MSOL26" & NextNumber & "<br><b>Project Name:</b> " & ProjName.Text & "<br><b>End User:</b> " & ComboBox1.Selected.CutomerName & "<br><b>Business Unit:</b> " & BU.Selected.BU & "<br><b>Order Value:</b> $" & DataCardValue10.Text & "<br><br>Best regards,<br>Automated Sales System",
+                                      {IsHtml: true}
+                                  ),
+                                  // Omit quote fields on update to preserve the existing write set.
+                                  Patch(SalesTracker, varCurrentRecord, submission)
+                              )
+                          )
+                      )
+                  );
+                Refresh(SalesTracker);
+                  // --- POST-SUBMISSION CLEANUP (Returns user to Landing Page) ---
+                  UpdateContext({
+                      varShowForm: false,
+                      varShowSearch: false, // Hides search bar to return to Landing state
+                      varCurrentRecord: Blank(),
+                      varIsNewMode: false,
+                      varSubmitAttempted: false
+                  });
+
+                  UpdateContext({ varResetControls: true });
+                  UpdateContext({ varResetControls: false });
+
+                  Reset(cmbSearchQuote);
+                  Reset(cmbSearchRFQ);
+                  Reset(cmbSearchPO);
+                  Notify("Opportunity submitted and email sent successfully!", NotificationType.Success)
+              )
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            Text: =If(varIsNewMode, "Submit", "Update")
+            X: =72
+            Y: =713
+      - ContainerLanding:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            Height: =40
+            Width: =1211
+            X: =72
+            Y: =39
+          Children:
+            - btnModeNew:
+                Control: Classic/Button
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  OnSelect: |-
+                    =UpdateContext({
+                        varCurrentRecord: Blank(),
+                        varSubmitAttempted: false,
+                        varIsNewMode: true,
+                        varShowSearch: false, // Hide search bar
+                        varShowForm: true     // Reveal the form
+                    });
+
+                    // 2. Trigger mass-reset toggle to clear all text inputs
+                    UpdateContext({ varResetControls: true });
+                    UpdateContext({ varResetControls: false });
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Text: ="New"
+            - btnModeExist:
+                Control: Classic/Button
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  OnSelect: |-
+                    =// Reveal the Search container, hide the form until a record is found
+                    UpdateContext({
+                        varIsNewMode: false,
+                        varSubmitAttempted: false,
+                        varShowSearch: true,
+                        varShowForm: false
+                    });
+
+                    // Clear out old search queries
+                    Reset(cmbSearchQuote);
+                    Reset(cmbSearchRFQ);
+                    Reset(cmbSearchPO);
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  Text: ="Exist"
+                  X: =1051
+      - ContainerSearch:
+          Control: GroupContainer
+          Variant: ManualLayout
+          Properties:
+            Height: =100
+            Visible: =varShowSearch
+            Width: =1303
+            X: =30
+            Y: =79
+          Children:
+            - Button2:
+                Control: Classic/Button
+                Properties:
+                  BorderColor: =ColorFade(Self.Fill, -15%)
+                  Color: =RGBA(255, 255, 255, 1)
+                  DisabledBorderColor: =RGBA(166, 166, 166, 1)
+                  Fill: =RGBA(56, 96, 178, 1)
+                  Font: =Font.'Open Sans'
+                  HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+                  HoverColor: =RGBA(255, 255, 255, 1)
+                  HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  OnSelect: |-
+                    =Refresh(SalesTracker);
+                    If(
+                        IsBlank(cmbSearchQuote.Selected) && IsBlank(cmbSearchRFQ.Selected) && IsBlank(cmbSearchPO.Selected),
+                        Notify("Please select a Quote, RFQ, or PO Number to search.", NotificationType.Warning),
+                        // Keep quote > project > PO priority and refresh-based record lookup.
+                        UpdateContext({
+                            varCurrentRecord: If(
+                                !IsBlank(cmbSearchQuote.Selected),
+                                LookUp(SalesTracker, Quote_No = cmbSearchQuote.Selected.Quote_No),
+                                !IsBlank(cmbSearchRFQ.Selected),
+                                LookUp(SalesTracker, Project_Name = cmbSearchRFQ.Selected.Project_Name),
+                                !IsBlank(cmbSearchPO.Selected),
+                                LookUp(SalesTracker, PO_Reference = cmbSearchPO.Selected.PO_Reference)
+                            )
+                        });
+                        If(
+                            !IsBlank(varCurrentRecord),
+                            UpdateContext({varShowForm: true}),
+                            Notify("No matching record found.", NotificationType.Error)
+                        )
+                    )
+                  PressedBorderColor: =Self.Fill
+                  PressedColor: =Self.Fill
+                  PressedFill: =Self.Color
+                  TabIndex: =2
+                  Text: ="Search"
+                  X: =504
+                  Y: =60
+            - cmbSearchPO:
+                Control: Classic/ComboBox
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  DisplayFields: =["PO_Reference"]
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  InputTextPlaceholder: ="PO Reference"
+                  Items: =SalesTracker
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  SearchFields: =["PO_Reference"]
+                  SelectMultiple: =false
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  Width: =350
+                  X: =870
+                  Y: =10
+            - cmbSearchRFQ:
+                Control: Classic/ComboBox
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  DisplayFields: =["Project_Name"]
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  InputTextPlaceholder: ="Project Name"
+                  Items: =SalesTracker
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =true
+                  SearchFields: =["Project_Name"]
+                  SelectMultiple: =false
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  Width: =350
+                  X: =40
+                  Y: =10
+            - cmbSearchQuote:
+                Control: Classic/ComboBox
+                Properties:
+                  BorderColor: =RGBA(0, 18, 107, 1)
+                  ChevronBackground: =RGBA(56, 96, 178, 1)
+                  ChevronFill: =RGBA(255, 255, 255, 1)
+                  ChevronHoverBackground: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+                  ChevronHoverFill: =RGBA(255, 255, 255, 1)
+                  DisplayFields: =["Quote_No"]
+                  Font: =Font.'Open Sans'
+                  HoverFill: =RGBA(186, 202, 226, 1)
+                  InputTextPlaceholder: ="Quote No"
+                  Items: =SalesTracker
+                  PressedColor: =RGBA(255, 255, 255, 1)
+                  PressedFill: =RGBA(0, 18, 107, 1)
+                  Reset: =true
+                  SearchFields: =["Quote_No"]
+                  SelectMultiple: =false
+                  SelectionColor: =RGBA(255, 255, 255, 1)
+                  SelectionFill: =RGBA(56, 96, 178, 1)
+                  TabIndex: =1
+                  Width: =350
+                  X: =455
+                  Y: =10
+      - Button4:
+          Control: Classic/Button
+          Properties:
+            BorderColor: =ColorFade(Self.Fill, -15%)
+            Color: =RGBA(255, 255, 255, 1)
+            DisabledBorderColor: =RGBA(166, 166, 166, 1)
+            Fill: =RGBA(56, 96, 178, 1)
+            Font: =Font.'Open Sans'
+            HoverBorderColor: =ColorFade(Self.BorderColor, 20%)
+            HoverColor: =RGBA(255, 255, 255, 1)
+            HoverFill: =ColorFade(RGBA(56, 96, 178, 1), -20%)
+            OnSelect: |
+              =// 1. Return all visibility states to the initial Landing Page setup
+              UpdateContext({
+                  varCurrentRecord: Blank(),
+                  varSubmitAttempted: false,
+                  varIsNewMode: false,
+                  varShowForm: false,     // Hides the main form
+                  varShowSearch: false    // Hides the 3 search boxes
+              });
+
+              // 2. Safely wipe out and clear all search dropdowns
+              Reset(cmbSearchQuote);
+              Reset(cmbSearchRFQ);
+              Reset(cmbSearchPO);
+              Refresh(SalesTracker);
+              // 3. Now trigger the mass-reset toggle to clear all text inputs & dropdowns inside Container1
+              UpdateContext({ varResetControls: true });
+              UpdateContext({ varResetControls: false });
+            PressedBorderColor: =Self.Fill
+            PressedColor: =Self.Fill
+            PressedFill: =Self.Color
+            Text: ="RESET"
+            X: =1123
+            Y: =713
