@@ -102,8 +102,18 @@ function compare(path: string, expected: unknown, actual: unknown,
       differences.push({ path, expected: short(expected), actual: short(actual) });
       return;
     }
-    expected.forEach((value, index) => compare(path + "[" + index + "]",
-      value, actual[index], differences));
+    // Pivot-table names are an object inventory, not a report layout sequence.
+    // Compare that inventory by name (including multiplicity). Sheet order,
+    // table headers, formula patterns and every other array remain positional.
+    // This does NOT verify pivot positions/layout; those need visual acceptance
+    // or a separate approved layout baseline.
+    const pivotInventory = /^\$\.sheets\[\d+\]\.pivotTables$/.test(path) &&
+      expected.every(value => typeof value === "string") &&
+      actual.every(value => typeof value === "string");
+    const expectedValues: unknown[] = pivotInventory ? expected.slice().sort() : expected;
+    const actualValues: unknown[] = pivotInventory ? actual.slice().sort() : actual;
+    expectedValues.forEach((value, index) => compare(path + "[" + index + "]",
+      value, actualValues[index], differences));
     return;
   }
   if (expected !== null && typeof expected === "object") {

@@ -1,0 +1,779 @@
+[
+  {
+    "Title": "FY26 P12",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "FY27 P01",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "FY27 P02",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "FY27 P03",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "FY27 P04",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "FY27 P05",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 6
+  },
+  {
+    "Title": "FY27 P06",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 7
+  },
+  {
+    "Title": "FY27 P07",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 8
+  },
+  {
+    "Title": "FY27 P08",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 9
+  },
+  {
+    "Title": "FY27 P09",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 10
+  },
+  {
+    "Title": "FY27 P10",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 11
+  },
+  {
+    "Title": "FY27 P11",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 12
+  },
+  {
+    "Title": "FY27 P12",
+    "Category": "BookPeriod",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 13
+  },
+  {
+    "Title": "Yes",
+    "Category": "YesNo",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "No",
+    "Category": "YesNo",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "Marwa",
+    "Category": "Presales",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "Yousra",
+    "Category": "Presales",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "Gamal",
+    "Category": "Presales",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "NA",
+    "Category": "Presales",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "Badr",
+    "Category": "Presales",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "0",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "0.1",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "0.2",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "0.25",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "0.5",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "0.55",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 6
+  },
+  {
+    "Title": "0.75",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 7
+  },
+  {
+    "Title": "0.9",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 8
+  },
+  {
+    "Title": "1",
+    "Category": "Prob",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 9
+  },
+  {
+    "Title": "M&A",
+    "Category": "BU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "FMP",
+    "Category": "BU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "MSS",
+    "Category": "BU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "PT",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "L",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "LAD",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "PGA",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "GC",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "COMP",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 6
+  },
+  {
+    "Title": "F&G",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 7
+  },
+  {
+    "Title": "RFD",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 8
+  },
+  {
+    "Title": "MMI",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 9
+  },
+  {
+    "Title": "FLEXIM",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 10
+  },
+  {
+    "Title": "Service",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 11
+  },
+  {
+    "Title": "Training",
+    "Category": "SubBU",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 12
+  },
+  {
+    "Title": "Initiative",
+    "Category": "QuotationType",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "Budgetary",
+    "Category": "QuotationType",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "Firm",
+    "Category": "QuotationType",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "SWD",
+    "Category": "QuotationType",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "Call or Meeting",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "Negotiation",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "Wait Process Data",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "Wait Order",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "Submit Order",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "Prep. Quote / Rev. + Dis. Appr.",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 6
+  },
+  {
+    "Title": "Send Quot to Cust.",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 7
+  },
+  {
+    "Title": "TQ Reply",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 8
+  },
+  {
+    "Title": "PM Tech. Advise",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 9
+  },
+  {
+    "Title": "Hold",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 10
+  },
+  {
+    "Title": "No Action",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 11
+  },
+  {
+    "Title": "NA",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 12
+  },
+  {
+    "Title": "0",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 13
+  },
+  {
+    "Title": "10",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 14
+  },
+  {
+    "Title": "20",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 15
+  },
+  {
+    "Title": "25",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 16
+  },
+  {
+    "Title": "45",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 17
+  },
+  {
+    "Title": "50",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 18
+  },
+  {
+    "Title": "75",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 19
+  },
+  {
+    "Title": "85",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 20
+  },
+  {
+    "Title": "90",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 21
+  },
+  {
+    "Title": "100",
+    "Category": "Next Action",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 22
+  },
+  {
+    "Title": "EM Sales",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "EM Presales",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "EM Order Process",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "EM Product M.",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "EN Sales",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "EN Presales",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 6
+  },
+  {
+    "Title": "EN Order Process",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 7
+  },
+  {
+    "Title": "EN Product M.",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 8
+  },
+  {
+    "Title": "Cust. Purchasing",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 9
+  },
+  {
+    "Title": "Cust. Technical",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 10
+  },
+  {
+    "Title": "Submittal Team",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 11
+  },
+  {
+    "Title": "No Action",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 12
+  },
+  {
+    "Title": "NA",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 13
+  },
+  {
+    "Title": "Lead development",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 15
+  },
+  {
+    "Title": "Budg/Tech/DOA Needed",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 16
+  },
+  {
+    "Title": "Budgetary Offer follow up",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 17
+  },
+  {
+    "Title": "Firm Comm/Tech/DOA Needed",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 18
+  },
+  {
+    "Title": "Lead need to be secured",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 19
+  },
+  {
+    "Title": "PipeLine - Secure in it's Period",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 20
+  },
+  {
+    "Title": "Order Received - PreS. to submit",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 21
+  },
+  {
+    "Title": "Reviewing Order",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 22
+  },
+  {
+    "Title": "Order Delivery Follow up",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 23
+  },
+  {
+    "Title": "Revised Offer Needed",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 24
+  },
+  {
+    "Title": "DOA/DRF",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 25
+  },
+  {
+    "Title": "Technical Offer",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 26
+  },
+  {
+    "Title": "Commercial Offer",
+    "Category": "Action By",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 27
+  },
+  {
+    "Title": "Meet Cust. Request",
+    "Category": "Scope Of Supply",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "Standard Offering (M5,Q4)",
+    "Category": "Scope Of Supply",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "Specific Series",
+    "Category": "Scope Of Supply",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "Best Accuracy",
+    "Category": "Scope Of Supply",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "As Per Line Size",
+    "Category": "Scope Of Supply",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "As Per Flow Rate",
+    "Category": "Scope Of Supply",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 6
+  },
+  {
+    "Title": "Competitive Replacement",
+    "Category": "Lead Type",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "Technology Replacement",
+    "Category": "Lead Type",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  },
+  {
+    "Title": "Direct Replacement",
+    "Category": "Lead Type",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 3
+  },
+  {
+    "Title": "New Installation",
+    "Category": "Lead Type",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 4
+  },
+  {
+    "Title": "Upgrade",
+    "Category": "Lead Type",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 5
+  },
+  {
+    "Title": "Spares",
+    "Category": "Lead Type",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 6
+  },
+  {
+    "Title": "Service Visit",
+    "Category": "Lead Type",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 7
+  },
+  {
+    "Title": "Specs",
+    "Category": "Specs or Model",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 1
+  },
+  {
+    "Title": "Model",
+    "Category": "Specs or Model",
+    "ParentValue": "",
+    "Active": true,
+    "SortOrder": 2
+  }
+]

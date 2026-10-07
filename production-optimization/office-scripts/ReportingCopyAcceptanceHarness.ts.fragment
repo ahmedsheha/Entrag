@@ -1,0 +1,77 @@
+// TEST ONLY: prepend to the reporting source with its main renamed reportingMain.
+// Run solely through the no-email COPY pilot, then restore the standard source.
+function main(workbook: ExcelScript.Workbook, sheetPassword: string,
+  requestJson: string): string {
+  if (workbook.getName() !== "Final_Sales_Master_Rev12_11 (Uploaded)(xlsx) - Copy.xlsx") {
+    throw new Error("Acceptance harness refuses any workbook other than the COPY.");
+  }
+  const request = JSON.parse(requestJson) as ReportingRequest;
+  validateRequest(request);
+  if (request.opportunityId !== 163 || request.quoteNo !== "MSOL2614") {
+    throw new Error("Acceptance harness requires the isolated synthetic fixture.");
+  }
+  const table = workbook.getTable("SalesTracker");
+  const headers = table.getHeaderRowRange().getTexts()[0];
+  const keyColumn = headers.indexOf("__PowerAppsId__");
+  const customerColumn = headers.indexOf("Customer Name");
+  const count = table.getRowCount();
+  const last = table.getRangeBetweenHeaderAndTotal().getRow(count - 1);
+  if (String(last.getCell(0, keyColumn).getValue()) !== request.excelRowKey) {
+    throw new Error("Fixture must be the final row; no business rows were changed.");
+  }
+  const originalFormula = last.getCell(0, customerColumn).getFormula();
+  const originalValue = last.getCell(0, customerColumn).getValue();
+  if (typeof originalFormula !== "string" || !originalFormula.startsWith("=")) {
+    throw new Error("Fixture customer formula must exist before the test.");
+  }
+  const temporaryKey = request.excelRowKey + "__COPY_ACCEPTANCE_ONLY";
+  const protection = table.getWorksheet().getProtection();
+  if (!protection.getProtected() || protection.getIsPaused() ||
+      !protection.getCanPauseProtection() || !protection.checkPassword(sheetPassword)) {
+    throw new Error("Invalid protection state; no changes made.");
+  }
+  let modified = false;
+  try {
+    protection.pauseProtection(sheetPassword);
+    try {
+      modified = true;
+      last.getCell(0, customerColumn).setValue("COPY_TEST_MANUAL_CUSTOMER");
+    } finally { if (protection.getIsPaused()) protection.resumeProtection(); }
+    reportingMain(workbook, sheetPassword, requestJson);
+    if (last.getCell(0, customerColumn).getValue() !== "COPY_TEST_MANUAL_CUSTOMER") {
+      throw new Error("Existing-row sync overwrote the manual customer correction.");
+    }
+    const temporaryRequest = JSON.parse(requestJson) as ReportingRequest;
+    temporaryRequest.excelRowKey = temporaryKey;
+    temporaryRequest.quoteNo = "COPY_ACCEPTANCE_ONLY_NOT_A_QUOTE";
+    temporaryRequest.quoteSeq = null;
+    reportingMain(workbook, sheetPassword, JSON.stringify(temporaryRequest));
+    const added = table.getRangeBetweenHeaderAndTotal().getRow(count);
+    const addedFormula = added.getCell(0, customerColumn).getFormula();
+    if (typeof addedFormula !== "string" || !addedFormula.startsWith("=")) {
+      throw new Error("New-row customer calculated formula did not propagate.");
+    }
+    reportingMain(workbook, sheetPassword, JSON.stringify(temporaryRequest));
+    if (table.getRowCount() !== count + 1) throw new Error("Retry duplicated the temporary row.");
+  } finally {
+    if (modified) {
+      protection.pauseProtection(sheetPassword);
+      try {
+        const keys = table.getRangeBetweenHeaderAndTotal().getColumn(keyColumn).getTexts();
+        for (let index = keys.length - 1; index >= 0; index--) {
+          if (keys[index][0] === temporaryKey) table.deleteRowsAt(index, 1);
+        }
+        const cell = table.getRangeBetweenHeaderAndTotal().getRow(count - 1).getCell(0, customerColumn);
+        if (typeof originalFormula === "string" && originalFormula.startsWith("=")) {
+          cell.setFormula(originalFormula);
+        } else { setLiteral(cell, originalValue); }
+      } finally { if (protection.getIsPaused()) protection.resumeProtection(); }
+    }
+  }
+  if (table.getRowCount() !== count || protection.getIsPaused() || !protection.getProtected()) {
+    throw new Error("Acceptance cleanup or protection verification failed.");
+  }
+  return JSON.stringify({ status: "pass", manualCustomerPreserved: true,
+    newRowFormulaPresent: true, retryIdempotent: true, temporaryRowRemoved: true,
+    originalCustomerFormulaRestored: true, protected: true, rowCount: count });
+}

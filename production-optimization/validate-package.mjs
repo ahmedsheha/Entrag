@@ -6,7 +6,9 @@ const files = {
   fx: "production-optimization/power-fx.md",
   sync: "production-optimization/office-scripts/SyncSalesTrackerReporting.ts",
   capture: "production-optimization/office-scripts/CaptureWorkbookContract.ts",
-  compare: "production-optimization/office-scripts/CompareWorkbookContract.ts"
+  compare: "production-optimization/office-scripts/CompareWorkbookContract.ts",
+  customers: "production-optimization/migration/sales-customers.json",
+  options: "production-optimization/migration/sales-options.json"
 };
 
 const text = Object.fromEntries(await Promise.all(Object.entries(files).map(
@@ -45,8 +47,24 @@ for (const token of ["sheetNames", "formulaPatterns", "numberFormatPatterns",
   }
 }
 
+const customers = JSON.parse(text.customers);
+const options = JSON.parse(text.options);
+if (!customers.length) failures.push("reference data: no customers");
+if (!options.length) failures.push("reference data: no options");
+if (new Set(customers.map((row) => row.Title.toLocaleLowerCase())).size !== customers.length) {
+  failures.push("reference data: duplicate customer Title");
+}
+if (new Set(options.map((row) => `${row.Category}\u0000${row.Title}`.toLocaleLowerCase())).size !== options.length) {
+  failures.push("reference data: duplicate Category/Title option");
+}
+for (const category of ["BookPeriod", "Prob", "BU", "SubBU", "Scope Of Supply", "Lead Type", "Specs or Model"]) {
+  if (!options.some((row) => row.Category === category)) {
+    failures.push(`reference data: missing ${category}`);
+  }
+}
+
 if (failures.length) {
   console.error(JSON.stringify({ status: "failed", failures }, null, 2));
   process.exit(1);
 }
-console.log(JSON.stringify({ status: "passed", checks: 49 }, null, 2));
+console.log(JSON.stringify({ status: "passed", checks: 60 }, null, 2));

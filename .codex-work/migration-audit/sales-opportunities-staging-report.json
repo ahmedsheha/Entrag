@@ -1,0 +1,125 @@
+{
+  "generatedAt": "2026-10-04T18:12:29.207Z",
+  "workbookPath": "/Users/sheha/Library/CloudStorage/OneDrive-entrag.com/Final_Sales_Master_Rev12_11 (Uploaded)(xlsx) - Copy.xlsx",
+  "recordCount": 152,
+  "existingExcelRowKeyCount": 26,
+  "generatedExcelRowKeyCount": 126,
+  "uniqueQuoteNoCount": 72,
+  "duplicateQuoteNos": [
+    "26346",
+    "26284",
+    "26293",
+    "26424",
+    "Lead",
+    "26208",
+    "26492",
+    "17389136",
+    "Budgetary",
+    "22436"
+  ],
+  "duplicateExcelRowKeys": [],
+  "duplicateClientRequestIds": [],
+  "msol26Records": [
+    {
+      "sourceRow": 343,
+      "quoteNo": "MSOL261",
+      "quoteSeq": 1
+    },
+    {
+      "sourceRow": 344,
+      "quoteNo": "MSOL262",
+      "quoteSeq": 2
+    },
+    {
+      "sourceRow": 345,
+      "quoteNo": "MSOL263",
+      "quoteSeq": 3
+    }
+  ],
+  "maxQuoteSeq": 3,
+  "overlengthProjectNames": [
+    {
+      "sourceRow": 92,
+      "excelRowKey": "6d85baed-96ee-542c-8710-2dd62e0bbf99",
+      "indexedLength": 255,
+      "fullLength": 260
+    }
+  ],
+  "warnings": [
+    {
+      "sourceRow": 5,
+      "field": "Discount",
+      "issue": "could not convert value: 52-32"
+    },
+    {
+      "sourceRow": 8,
+      "field": "Discount",
+      "issue": "could not convert value: 45-39"
+    },
+    {
+      "sourceRow": 11,
+      "field": "Discount",
+      "issue": "could not convert value: 35-69-71"
+    },
+    {
+      "sourceRow": 19,
+      "field": "Discount",
+      "issue": "could not convert value: 65-60"
+    },
+    {
+      "sourceRow": 26,
+      "field": "Discount",
+      "issue": "could not convert value: 59-49-29"
+    },
+    {
+      "sourceRow": 28,
+      "field": "Discount",
+      "issue": "could not convert value: 78-69"
+    },
+    {
+      "sourceRow": 29,
+      "field": "Discount",
+      "issue": "could not convert value: 61 - 58"
+    },
+    {
+      "sourceRow": 42,
+      "field": "Discount",
+      "issue": "could not convert value: 59-55"
+    },
+    {
+      "sourceRow": 61,
+      "field": "Discount",
+      "issue": "could not convert value: 60-69"
+    },
+    {
+      "sourceRow": 75,
+      "field": "Discount",
+      "issue": "could not convert value: tech"
+    },
+    {
+      "sourceRow": 100,
+      "field": "Discount",
+      "issue": "could not convert value: 71-38"
+    },
+    {
+      "sourceRow": 344,
+      "field": "OrderValue",
+      "issue": "could not convert value: fsd"
+    },
+    {
+      "sourceRow": 344,
+      "field": "Discount",
+      "issue": "could not convert value: asf"
+    },
+    {
+      "sourceRow": 345,
+      "field": "OrderValue",
+      "issue": "could not convert value: Ad"
+    },
+    {
+      "sourceRow": 345,
+      "field": "Discount",
+      "issue": "could not convert value: Adssda"
+    }
+  ]
+}

@@ -13,6 +13,15 @@ Concurrent(
 
 Do not collect `SalesOpportunities`.
 
+Current saved development implementation (7 October) supersedes the above
+imperative startup example: OnStart is only `Set(varIsSaving, false)`.
+App.Formulas defines read-only named tables `colSalesCustomers` and
+`colSalesOptions` from filtered/sorted SharePoint references, with the existing
+CutomerName and option-field aliases. Neither name now denotes an initialized
+mutable collection. App checker reports no performance issues after Recheck.
+BU's Value/display field is BU, not Category; otherwise every choice displays
+the category label instead of M&A/FMP/MSS. Actual six-user timing is still due.
+
 ## Smart search
 
 Set the search input `DelayOutput` to true. The results gallery uses indexed,
@@ -146,6 +155,34 @@ If(
 
 Keep `varRequestId` after an error so a retry is idempotent. Clear it after success,
 after an explicit cancel, or when starting a different record.
+
+## Current development app: Reset (7 October)
+
+The current app uses `varIsSaving` (not this document's generic `varSaving`).
+Button4 `DisplayMode` is
+`If(varIsSaving, DisplayMode.Disabled, DisplayMode.Edit)`.
+Its OnSelect is guarded by `!varIsSaving`, clears screen-local
+`varCurrentRecord` and `varCurrentSPRecord`, resets submission/visibility/mode
+state, sets `varResetControls=false`, clears the global `varRequestId`, and
+explicitly calls Reset on the search, PO, text, customer, copy toggle and all
+business dropdown/input controls. This is an explicit cancellation; do not
+clear request IDs automatically on ambiguous save failures.
+
+DataCardValue14 Default is
+`PlainText(Coalesce(varCurrentRecord.'Scope of Supply Details', ""))`, preventing
+SharePoint rich-text wrappers from appearing as editable text.
+
+## New must start with blank dropdowns (7 October)
+
+BU, Dropdown2, Dropdown3, Prob, Dropdown1, Dropdown6 and Sales Recommendation
+now use AllowEmptySelection=true. Their Default formulas wrap the original
+saved-record default in `If(varIsNewMode, Blank(), <original default>)`.
+Otherwise a Reset restores the first option instead of a blank entry.
+btnModeNew uses the same explicit reset list as Button4, but sets
+varIsNewMode=true and varShowForm=true. Both record states and varRequestId are
+cleared before resetting inputs. New is disabled/guarded while varIsSaving.
+The copy-End-User-to-Customer toggle stays on in New mode; both names are blank
+until an End User is chosen.
 
 Add `txtPOReference` to the existing form and default it from
 `varCurrentRecord.POReference`. This replaces the old search-only PO behavior and

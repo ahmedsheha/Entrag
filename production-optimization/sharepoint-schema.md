@@ -9,8 +9,9 @@ permissions.
 | --- | --- | --- | --- |
 | Title | Single line text | Yes | No; set to QuoteNo |
 | QuoteNo | Single line text | Yes | Indexed; new `MSOL26` values are unique by flow |
-| QuoteSeq | Number, 0 decimals | Yes | Indexed, unique |
+| QuoteSeq | Number, 0 decimals | No for legacy compatibility; required by create flow | Indexed, unique when populated |
 | ClientRequestId | Single line text | Yes | Indexed, unique |
+| LastUpdateRequestId | Single line text | No | No; operational receipt, excluded from Excel/default view |
 | Revision | Number, 0 decimals | Yes | Indexed; default 1 |
 | ExcelRowKey | Single line text | Yes | Indexed, unique |
 | OpportunityDate | Date and time | No for legacy compatibility; required by create/update flows | Indexed |
@@ -37,10 +38,10 @@ QuoteNo, ProjectName, and POReference with delegable prefix filters. It never
 downloads the complete list.
 
 The management workbook contains duplicate legacy QuoteNo values and legacy rows
-without OpportunityDate, Application, or Discount. The migration must preserve
-those values exactly. Column-level QuoteNo uniqueness and those three required
-flags therefore apply through the create/update flows for new operational records,
-not retroactively to legacy rows. QuoteSeq remains unique when populated, and
+without QuoteSeq, OpportunityDate, Application, or Discount. The migration must
+preserve those values exactly. Column-level QuoteNo uniqueness and the new-record
+required flags therefore apply through the create/update flows, not retroactively
+to legacy rows. QuoteSeq remains unique when populated, and
 ExcelRowKey/ClientRequestId remain unique for every migrated row.
 
 ## SalesSequence

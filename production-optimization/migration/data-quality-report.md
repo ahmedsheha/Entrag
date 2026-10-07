@@ -1,7 +1,12 @@
 # Pilot workbook migration assessment
 
 Source checksum:
-`1a09e967b78c860eda3bd3d8b91938d32548142d438069e5d13197b52cea59c1`
+`2049cf5a6ef8fab9fb6d82af0f0fb4d6f64b912c70454783a5dc975eecfb78d2`
+
+This is the current XLSX package checksum after Excel Online autosaved the cloud
+file. Cloud autosave can change package metadata without changing the reporting
+contract, so release approval uses the captured structural contract comparison,
+not binary checksum equality.
 
 ## Inventory
 
@@ -43,6 +48,8 @@ To preserve management reporting values exactly:
 4. Allow legacy blanks in OpportunityDate, Application, and Discount at the list
    schema level, while enforcing them in the Power App and both save flows.
 
-Importing under the original strict column constraints would either fail or force
-changes to management data, so it is release-blocking until this compatibility
-rule is accepted.
+These compatibility rules were approved and applied to the live
+SalesOpportunities list. The migration package contains 152 records, 152 unique
+ExcelRowKey values, and no missing values in fields that remain required during
+legacy import. Its SHA-256 is
+`a0b24b902ebb6cba0cf7e8bf059c22a49d442bb5eedca3a118ed7ec5402a9789`.

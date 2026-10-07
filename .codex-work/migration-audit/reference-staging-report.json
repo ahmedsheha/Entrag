@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-10-04T18:18:42.868Z",
+  "customerSourceRows": 305,
+  "uniqueCustomers": 208,
+  "existingCustomersVerified": 90,
+  "remainingCustomers": 118,
+  "optionCount": 112,
+  "optionCategoryCounts": {
+    "BookPeriod": 13,
+    "YesNo": 2,
+    "Presales": 5,
+    "Prob": 9,
+    "BU": 3,
+    "SubBU": 12,
+    "QuotationType": 4,
+    "Next Action": 22,
+    "Action By": 27,
+    "Scope Of Supply": 6,
+    "Lead Type": 7,
+    "Specs or Model": 2
+  }
+}

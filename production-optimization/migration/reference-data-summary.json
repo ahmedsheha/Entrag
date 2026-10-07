@@ -1,0 +1,25 @@
+{
+  "customerHeaderRow": 1,
+  "customerCount": 208,
+  "optionHeaders": [
+    "BookPeriod",
+    "Column1",
+    "__PowerAppsId__",
+    "YesNo",
+    "Presales",
+    "Prob",
+    "BU",
+    "SubBU",
+    "QuotationType",
+    "Next Action",
+    "Action By",
+    "Column1",
+    "Scope Of Supply",
+    "__PowerAppsId__",
+    "Lead Type",
+    "__PowerAppsId__",
+    "Specs or Model",
+    "Column1"
+  ],
+  "optionCount": 111
+}

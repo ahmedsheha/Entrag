@@ -1,0 +1,74 @@
+// TEST ONLY. Prepend to the normal source after renaming main to reportingMain.
+// Restore the standard source immediately after the bounded no-email pilot run.
+function main(workbook: ExcelScript.Workbook, sheetPassword: string,
+  requestJson: string): string {
+  if (workbook.getName() !== "Final_Sales_Master_Rev12_11 (Uploaded)(xlsx) - Copy.xlsx") {
+    throw new Error("Failure test refuses any workbook other than the COPY.");
+  }
+  const request = JSON.parse(requestJson) as ReportingRequest;
+  validateRequest(request);
+  if (request.opportunityId !== 163 || request.quoteNo !== "MSOL2614") {
+    throw new Error("Failure test requires the isolated synthetic fixture.");
+  }
+  const table = workbook.getTable("SalesTracker");
+  const headers = table.getHeaderRowRange().getTexts()[0];
+  const count = table.getRowCount();
+  const last = table.getRangeBetweenHeaderAndTotal().getRow(count - 1);
+  if (String(last.getCell(0, headers.indexOf("__PowerAppsId__")).getValue()) !== request.excelRowKey) {
+    throw new Error("Synthetic fixture must be the final row.");
+  }
+  const protection = table.getWorksheet().getProtection();
+  if (!protection.getProtected() || protection.getIsPaused() ||
+      !protection.getCanPauseProtection() || !protection.checkPassword(sheetPassword)) {
+    throw new Error("Invalid starting protection state.");
+  }
+  const before = JSON.stringify(table.getRangeBetweenHeaderAndTotal().getFormulas());
+  let rejected = false;
+  try {
+    reportingMain(workbook, "COPY_TEST_INVALID_PASSWORD_20261007_9c1f", requestJson);
+  } catch (error) { rejected = String(error).includes("password check failed"); }
+  if (!rejected) throw new Error("Wrong-password failure was not rejected as expected.");
+  rejected = false;
+  try { reportingMain(workbook, sheetPassword, "{}"); }
+  catch (error) { rejected = String(error).includes("Invalid reporting request"); }
+  if (!rejected) throw new Error("Malformed payload was not rejected as expected.");
+  if (JSON.stringify(table.getRangeBetweenHeaderAndTotal().getFormulas()) !== before ||
+      table.getRowCount() !== count || protection.getIsPaused() || !protection.getProtected()) {
+    throw new Error("Rejected request changed cells, row count or protection.");
+  }
+  const cell = last.getCell(0, headers.indexOf("Project_Name"));
+  const originalFormula = cell.getFormula();
+  const originalValue = cell.getValue();
+  let modified = false;
+  try {
+    protection.pauseProtection(sheetPassword);
+    try { modified = true; cell.setFormula("=1"); }
+    finally { if (protection.getIsPaused()) protection.resumeProtection(); }
+    rejected = false;
+    try { reportingMain(workbook, sheetPassword, requestJson); }
+    catch (error) { rejected = String(error).includes("Approved input column contains a formula"); }
+    if (!rejected || cell.getFormula() !== "=1" || protection.getIsPaused() || !protection.getProtected()) {
+      throw new Error("Calculated-input guard failed or protection was left paused.");
+    }
+  } finally {
+    if (modified) {
+      protection.pauseProtection(sheetPassword);
+      try {
+        if (typeof originalFormula === "string" && originalFormula.startsWith("=")) {
+          cell.setFormula(originalFormula);
+        } else { setLiteral(cell, originalValue); }
+      } finally { if (protection.getIsPaused()) protection.resumeProtection(); }
+    }
+  }
+  if (JSON.stringify(table.getRangeBetweenHeaderAndTotal().getFormulas()) !== before) {
+    throw new Error("Failure-test cleanup did not restore original cells.");
+  }
+  reportingMain(workbook, sheetPassword, requestJson);
+  if (table.getRowCount() !== count || protection.getIsPaused() || !protection.getProtected()) {
+    throw new Error("Valid replay after failures duplicated a row or changed protection.");
+  }
+  return JSON.stringify({ status: "pass", wrongPasswordRejected: true,
+    malformedPayloadRejected: true, calculatedInputProtected: true,
+    originalCellsRestored: true, validReplayRecovered: true,
+    duplicateRows: false, protected: true });
+}
