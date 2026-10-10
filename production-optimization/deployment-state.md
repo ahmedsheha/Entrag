@@ -1,5 +1,533 @@
 # Deployment state
 
+## Production worker identity guard saved — 10 October 2026
+
+Continuation: reloaded the worker and confirmed the new Compose token persisted.
+Also discovered and replaced a second synthetic-163 restriction in the fresh
+queue claim Condition. It now checks positive source ID/target revision, excludes
+the same fixture IDs, verifies the job key, attempts below eight, Pending/Retry
+state and UTC due time. Expanded Get items to all eligible due jobs excluding
+fixture IDs, preserved its utcNow expression token and ID ascending order.
+Renamed this existing flow SyncSalesReportingWorker. Raised Top Count to 20 for
+bounded backlog throughput; independently verified Apply to each concurrency Off
+(sequential by default). Recurrence remains every one minute with concurrency On,
+degree one; removed the artificial 2040 start-time delay. These edits saved with
+ready banner and checker Errors 0 / Warnings 0. No enable/run action was taken.
+Independent flow details confirmed SyncSalesReportingWorker, Off, Modified
+10 October 2026 22:25 Cairo after the final save.
+Added offline claim/filter builders and 11 passing claim cases; existing 15
+source/job cases still pass, trigger eligibility tests pass, reconciliation policy
+28 checks pass. Live queue throughput and failure acceptance remain pending.
+
+Replaced the synthetic-only Compose predicate in existing worker
+`5998de92-8e3a-47a2-b434-a71a9f4f1829` with productionWorkerGuard. Selective
+accessibility selection changed the editor visually but did not update its model;
+the successful method was native keyboard Select All and native paste of the
+complete expression, retaining the 18 existing field mappings and seven payload
+properties. Code view then showed the new real-record predicate. Saved with ready
+banner, Flow checker Errors 0 / Warnings 0. Independent details confirmed Off,
+Modified 10 October 2026 22:19 Cairo. Offline guard tests: 15 passing scenarios.
+
+No worker execution, Excel write, notification, new copy or Power App publication
+occurred. Other reporting flows remain disabled. This supersedes the failed
+guard-edit checkpoint below, not the remaining rollout/acceptance requirements.
+
+## Enqueue generalized in place; worker conversion not saved — 10 October 2026
+
+User replied go after the site-owner blocker. Proceeding with Cairo site-setting
+deferred and UTC queue/lease timestamps; no permission change or workaround.
+Existing password retained per user instruction. COPY remains intended live
+report; original unchanged; Power App unpublished.
+
+Edited existing enqueue flow `82499d0a-4068-4be6-9eee-5d1074701e45` in place,
+renamed EnqueueSalesReporting, and replaced its synthetic-163 trigger restriction
+with productionQueueCondition from production-reporting-trigger.mjs. Requires
+nonempty stable key/request and positive Revision, excludes known fixture IDs
+154/155/156/157/158/159/160/163, performance-test request/key prefixes and TEST ONLY
+project/title labels. Existing queue create/read-back idempotency implementation
+unchanged; no Excel/mail action. Save success banner confirmed; checker Errors 0
+and Warnings 0. Details independently confirmed Off, Modified 21:58 Cairo.
+No queue creation or runtime replay was executed for the generalized scope.
+
+Added production-worker-guard.mjs and 15 passing offline source/job guard cases.
+It requires source ID equal queue OpportunityId, latest Revision >= target,
+correct job key, real-record scope and nonempty QuoteNo. Attempted selective
+Compose guard replacement in the existing disabled worker, preserving field
+mapping. Native selection and editor text showed an attempted edit, but Apply
+followed by Compose Code view still showed the original synthetic guard. Did NOT
+broaden Get items, rename, save or run the worker. Exited the designer; details
+independently confirmed worker Off and unchanged Modified 18:33 Cairo. Do not
+claim the production worker guard is deployed. Run script Parameters/definition
+were not opened or exported during this continuation.
+
+Enqueue MUST stay Off until worker and notification/reconciliation handling are
+ready. Current direct production SyncSalesReporting also remains Off at its last
+verified checkpoint, to avoid two workbook writers. No workbook/business-data
+write, email, app publish or new copy was performed. Reconciliation reference
+policy now shares production exclusions; runtime sweep remains undeployed.
+
+## All-steps continuation: site-owner regional-settings blocker — 10 October 2026
+
+User authorized proceeding with all remaining steps, retaining COPY as the live
+report and keeping Power App unpublished. User explicitly declined password
+rotation after exposure notification; retain the existing password. Rotation is
+a recommendation, not a current cutover blocker. Do not repeatedly request it,
+change it, or record its value. This supersedes earlier mandatory-rotation notes.
+
+Read-only current production SyncSalesReporting details verified Off, modified
+10 October 21:43 Cairo, no run history. Navigated normally in Arc to SharePoint
+InsideSalesTeam `/_layouts/15/regionalsetng.aspx` for the requested Cairo setting.
+SharePoint redirected to AccessDenied.aspx, Type=web. Current account cannot
+perform that site-setting step. No regional-setting change, access request,
+permission grant, alternate-account sign-in, or bypass was attempted. Site owner
+must set Cairo; do not claim configuration complete. Queue/flow lease timestamps
+continue to use UTC independent of the site's display timezone.
+
+Stopped at this new-authority blocker. No reporting enable, Excel/source write,
+email, new workbook copy, flow mutation, or app publication occurred in this
+continuation. General production recovery/reconciliation, final data/workbook/
+notification acceptance and real-session performance checks remain unfinished.
+
+## Production reporting retargeted to COPY and saved — 10 October 2026
+
+Owner replied done after the private binding handoff. Reconnection unexpectedly
+found Run script Parameters still open and File still pointing to the ORIGINAL.
+The password field was exposed by the accessibility state; owner was notified
+without repeating its value. Do not store the credential in documentation,
+exports, source, or chat. Private password rotation remains required before live
+activation; agent must not enter/change the credential.
+
+Used the existing Excel file picker to select
+`/Final_Sales_Master_Rev12_11 (Uploaded)(xlsx) - Copy.xlsx`; actual File field
+confirmed that path and Script remained SyncSalesTrackerReporting_Pilot_20261007.
+Closed Parameters by moving to Settings. Secure Inputs/Outputs On; exponential
+retry Count 6, Interval/Minimum PT10S, Maximum PT1M. An accidental action-picker
+open was closed without selecting/adding an action. Saved the existing
+production flow `0c4fc75e-f756-4110-85b1-e6be8c8bd81c`; ready-to-test banner
+confirmed save. Checker Errors 0 / Warnings 0. Details independently confirmed
+Modified 10 October 21:43 Cairo, Off, no run history. No workbook/SharePoint
+business write, email, pilot enable or app publish occurred. This verifies the
+selected file path, not a live write or connector file-ID comparison.
+
+Offline production-trigger eligibility and migration-email predicates rerun:
+152 prepared rows eligible for Excel, all 152 suppressed for notifications,
+11 trigger scenarios and 12 notification scenarios passed. These tests do not
+replace runtime acceptance. General durable reporting recovery/reconciliation
+is not production-ready; original workbook remains unchanged. Current blockers:
+private COPY protection-password rotation/update, production recovery readiness,
+and final live-target contract/data/notification acceptance.
+
+## Live destination changed to the tested COPY — 10 October 2026
+
+User explicitly superseded the original-workbook selection: use the COPY because
+its settings have already been prepared. Live destination is now
+`Final_Sales_Master_Rev12_11 (Uploaded)(xlsx) - Copy.xlsx`, document ID
+`2eb994dd-a0cb-4cc5-a3b4-ede017bf0977`. Leave original
+`7b4457ad-a15f-4600-a2be-b7a3f95e0061` unchanged. No original width repair or
+new original-specific baseline is authorized/needed for this route. Retain the
+original comparison evidence and approved baseline. App remains unpublished.
+
+This destination choice does not make the synthetic-only COPY worker production
+ready. Existing production SyncSalesReporting previously retained the original
+file binding; retarget that existing flow, do not simply enable a pilot. Its
+Run script Parameters expose the password: owner must privately choose the COPY,
+complete any required password rotation/entry, Save, and close Parameters before
+agent inspection resumes. Do not inspect/export the password-bearing definition.
+Production reporting remains Off pending verified binding and remaining safety
+checks. No file binding, workbook write, source edit, email, or activation is
+claimed by this documentation checkpoint.
+
+## Original report verified; layout decision blocks cutover — 10 October 2026
+
+User supplied the original online workbook link. Opened original named
+Final_Sales_Master_Rev12_11 (Uploaded)(xlsx).xlsx in Arc; document/WOPI identity
+`7b4457ad-a15f-4600-a2be-b7a3f95e0061` matches that link, distinct from COPY.
+Master Sheet visibly protected. Ran existing read-only CompareWorkbookContract
+with the unchanged approved baseline (10,099 characters; FNV-1a 1,754,044,479,
+verified before parameter entry). Actual completed output: status blocked,
+differenceCount 15. Expanded output and scroll verified all differences are
+column widths; details are in original-workbook-cutover.md. No other captured
+contract differences were reported. Do not equate script-success banner with
+contract pass. No original business/formula/layout/protection changes, new copy,
+reporting activation, email, source mutation, or Power App publish occurred.
+
+Need explicit user choice: preserve the current original layout as a separately
+approved original-specific contract, retaining the prior baseline and difference
+evidence, or restore the 15 earlier widths. Do not silently normalize either.
+Existing production flow remains Off at its independently verified checkpoint.
+
+## Original workbook selected; production trigger hardened — 10 October 2026
+
+User confirmed the ORIGINAL management workbook is the live-report destination,
+not the tested COPY. Power App must remain unpublished; no further test copies
+requested. Exact original online workbook identity/link and its current contract
+still need verification before any reporting activation or write. Do not assume
+the COPY document GUID identifies the original.
+
+Inspected existing production SyncSalesReporting
+`0c4fc75e-f756-4110-85b1-e6be8c8bd81c`. Source is SalesOpportunities on
+InsideSalesTeam; saved trigger concurrency is 1. Added a trigger condition
+requiring nonempty ClientRequestId/ExcelRowKey and excluding performance-test-
+request IDs, ProjectName starting TEST ONLY, and Title containing TEST ONLY
+(case-insensitive). Migration records remain eligible for Excel; existing
+migration-email suppression is separate. Reference condition and offline model
+are in production-reporting-trigger.mjs. All 152 prepared migration rows and
+11 eligibility scenarios passed offline; this is not a live trigger test.
+
+Save visibly succeeded with "Your flow is ready to go" and checker Errors 0 /
+Warnings 0. Details independently verified Modified 10 October 21:24 Cairo,
+Status Off and no run history. No Run script card, password-bearing definition,
+or credential was opened. No workbook write, notification, source mutation,
+pilot activation, or app publication occurred. Production retry/reconciliation
+limitations remain; this checkpoint is configuration preparation, not cutover.
+
+## Direct live cutover requested — 10 October 2026
+
+User requested proceeding with the current version directly, without further
+test copies, while explicitly keeping the Power App unpublished. This changes
+the rollout approach; it does not establish acceptance of incomplete integration
+or authorize publishing. Retain existing backups for rollback. Do not create the
+planned synthetic revision-4 interruption fixture or run its Excel recovery test
+against the live report during this transition.
+
+The authoritative live workbook must be confirmed: the currently tested reporting
+COPY or the original management workbook. Until that decision, do not retarget
+Excel writes, enable production reporting, or synchronize synthetic records into
+either workbook. Existing pilot workers are synthetic-only, not production-wide
+workers; enabling a pilot is not a production cutover. General reporting,
+notification/migration suppression, reconciliation, and production safety checks
+remain required. No Dataverse connector; Power App remains unpublished.
+
+This entry records the requested rollout change only. No live flow, workbook,
+SharePoint business record, notification, or app publication was changed here.
+
+## SharePoint-only manual recovery pilot deployed; rejection passed — 10 October 2026
+
+Built a separate legacy import package from the audited enqueue export; ONLY
+existing SharePoint connection reused. First package rejected before deployment
+because nested Reject names were duplicated. Corrected globally unique keys in
+v2 and added an audit. Accepted package
+`RecoverSalesReporting_Manual_Pilot_NoEmail_20261010_v2.zip`, SHA-256
+`2be7f3aea8b19fafa0c313c11088c226b089fb4ad8bc3309c00addbfa792e699`.
+21 package audits and 51 manual-policy checks passed offline; existing recovery
+39 checks passed. Do not import the rejected unversioned package.
+
+Importer confirmed all resources successfully imported as NEW flow
+`RecoverSalesReporting_Manual_Pilot_NoEmail_20261010`, live ID
+`fb626660-ba00-47bd-ae8a-fdf01dafadb3` (different from package GUID).
+Manual trigger only; parsed strict review input; queue identity fixed to 163-4,
+source fixed to synthetic 163/Revision 4/stable row key/request/quote. It contains
+no Excel, email, Dataverse, source mutation or queue create. The only write is
+a fresh-snapshot exact-ETag conditional MERGE to Retry, with action retries None,
+preserving attempts/completion/business identity. This relies on operator
+attestation, not automated proof of run or workbook execution settlement.
+
+Designer checker showed Errors 0 / Warnings 0. Details verified SharePoint only,
+owner Ahmed Adel, no run-only sharing and no associated app. Imported Off.
+Initial test blocked because Off. Temporarily enabled ONLY this instant pilot
+and submitted a synthetic Running-status request with all four safety approvals
+false (explicitly marked not an approval). Run
+`08584099585412675192028297477CU03` at 19:05 Cairo failed as intended in 315 ms.
+Live history: manual trigger and Parse review Succeeded; Read queue and Confirm
+job Skipped; Reject ReviewRejected Succeeded. No SharePoint action executed.
+Switched pilot Off and verified saved Status Off before inspecting this run.
+Production/COPY/reconcile/enqueue were independently Disabled in My flows before
+import and were not enabled. No source/Excel/email/app publication changes.
+
+This accepts deployment and the rejection path only. Positive conditional retry,
+ETag conflict and interrupted-worker/COPY upsert tests require a new isolated
+163-4 fixture; do not reset completed 163-1/2/3. General production recovery is
+not enabled and not accepted. The management workbook remains unchanged.
+Post-test independent SharePoint All Items read confirmed exactly the unchanged
+three receipts: 163-1/2/3 Succeeded, attempts 2/1/1, completed revisions 1/2/3.
+No 163-4 fixture was created in this deployment/rejection turn.
+
+## Non-Dataverse recovery checks implemented — 10 October 2026
+
+Exited the incomplete Dataverse designer using Back, without Save or Sign in.
+Fresh solution view showed exactly four flows, five connection references and
+one environment variable (10 objects), with production SyncSalesReporting and
+COPY worker Off. No Dataverse flow or connection was added.
+
+Implemented offline operator-reviewed `manual-reporting-recovery.mjs`, its
+51-check test suite and `manual-reporting-recovery.md`. The plan fails closed
+on active/unknown or mismatched run evidence, uncertain workbook execution,
+unquiesced writers, stale review, unexpired lease, attempt exhaustion, missing
+exact ETag and changed queue snapshot. It does not make any external writes;
+SharePoint conditional recovery deployment/interruption acceptance remains next.
+Existing recovery 39 and reconciliation 26 tests also passed; total 116 offline
+checks, not live-flow acceptance. Read live queue All Items: exactly 163-1/2/3
+Succeeded, attempts 2/1/1, completed revisions 1/2/3, no Running job displayed.
+No queue reset, source edit, Excel write, email, production enable or app publish.
+The site still displays Pacific time; Cairo regional-settings gate remains open.
+
+## Cost constraint — Dataverse connector rejected by user, 10 October 2026
+
+User instructed not to use Dataverse if it is not free. Microsoft licensing
+guidance identifies premium connectors as requiring premium entitlement; the
+selected Dataverse List rows action is also visibly PREMIUM. Do not sign in,
+save/deploy/run this Dataverse probe, start a trial, or buy a license. The probe
+remains incomplete and unsaved at the last UI checkpoint. Continue with the
+SharePoint-based architecture and standard connectors within existing licensed
+entitlements; no zero-cost entitlement has been established for this account.
+Automatic interrupted-job reclaim remains disabled until a safe non-premium
+proof mechanism is verified. Pending that, require administrator confirmation
+of the exact previous worker run's terminal state before manual recovery;
+lease expiry alone must never authorize another Excel write.
+
+## Read-only run-proof probe awaiting connection approval — 10 October 2026
+
+Opened New > Automation > Cloud flow > Instant in the existing solution and
+prepared unsaved `SalesReporting_RunProof_ReadOnly_Pilot_20261010` with a manual
+trigger. Selected Microsoft Dataverse List rows; the UI marks it PREMIUM and
+shows OAuth Sign in rather than an existing usable connection. Stopped before
+Sign in: new Dataverse connection access requires user approval and license
+availability remains unverified. No connection, security role, trial or purchase
+was created. No probe save/run, queue mutation, Excel write or email occurred.
+The solution list independently showed production SyncSalesReporting and the
+COPY worker both Off before opening the probe. The incomplete designer is not
+evidence of deployed recovery or a successful Flow Runs connector query.
+
+## Solution-aware recovery prerequisite verified — 10 October 2026
+
+Read-only Automation Center initially showed 52 runs for three existing solution
+flows. Registered ONLY disabled COPY worker
+`5998de92-8e3a-47a2-b434-a71a9f4f1829` using Add existing cloud flow > Outside
+Dataverse in Sales Production Optimization. Solution now has four flows and
+five connection references; migration added SharePoint
+`new_sharedsharepointonline_3d1f6` and Content Conversion
+`new_sharedconversionservice_a2a39` using existing connections. Independently
+verified worker Off and solution membership on its details page. No permission,
+credential, sharing, source, workbook, email or app publication changes.
+
+Queue pre-check showed all three jobs Succeeded. Temporarily enabled worker for
+empty-queue manual run `08584099605707719437455427481CU16` at 18:31:54 Cairo,
+then switched Off and verified saved Off. New run succeeded; queue claim and
+condition were visibly Skipped, so no nested Excel action executed. Automation
+Center Run history independently displayed exact worker/run link, Succeeded,
+duration 440 ms. This establishes new-run monitoring ingestion after registration,
+not connector payload fields or automatic recovery. No older history backfill
+is assumed. Do not enable automatic Running-job reclaim from this UI proof alone.
+
+Added fail-closed offline `flow-run-proof.mjs` and 26 passing tests; existing
+recovery policy still passes 39. Live Dataverse read-only exact-run probe,
+connector raw status/endtime mapping, licensing/access, fresh-queue ETag reclaim,
+active/unknown/missing history rejection and interruption tests remain pending.
+Production reporting stays Off; app unpublished. This supersedes the earlier
+"worker Outside Dataverse" checkpoint without changing its recovery behavior.
+
+## Reconciled revision-3 COPY synchronization passed — 10 October 2026
+
+Pre-run queue independently confirmed `163-3` Pending/AttemptCount 0 and earlier
+completed jobs unchanged. Temporarily enabled only guarded no-email COPY worker
+`5998de92-8e3a-47a2-b434-a71a9f4f1829`; manual run
+`08584099614029557506603419291CU12` at 18:18 Cairo succeeded in 14 seconds.
+Worker switched Off immediately after launch; saved Off verified. Final queue
+read showed exactly `163-1` Succeeded/AttemptCount 2/CompletedRevision 1,
+`163-2` Succeeded/AttemptCount 1/CompletedRevision 2 and `163-3` Succeeded/
+AttemptCount 1/CompletedRevision 3, with blank lease/retry/error fields.
+
+Opened exact reporting COPY sourcedoc `2eb994dd-a0cb-4cc5-a3b4-ede017bf0977`
+in the browser. Existing read-only CompareWorkbookContract ran from its editor
+using the unchanged approved baseline (10,099 characters, FNV-1a 1,754,044,479).
+Actual Output JSON: `{"status":"pass","differenceCount":0,"differences":[]}`.
+No comparator, baseline, workbook cells, widths or protection settings were
+edited manually. No email, production sync enable or app publication occurred.
+Captured structural/protection gate passed, not full visual/report refresh,
+business reconciliation or six-user production acceptance. Manual Refresh Required
+was visible and Refresh All was not invoked. Reconciler/enqueue remain Off at
+their prior verified checkpoints. General reconciliation and interrupted-worker
+recovery remain undeployed.
+
+## Synthetic missing-event reconciliation — 10 October 2026
+
+Verified enqueue, COPY worker and production sync Disabled in the live flow list.
+Changed only opportunity 163 Revision from 2 to 3 in SharePoint's inline editor;
+quote/stable identities and business values were not edited. This deliberately
+simulates a missed event, not an app/UpdateOpportunity test. Pre-run queue read
+showed only completed `163-1` and `163-2`, no `163-3`.
+Temporarily enabled the guarded queue-only reconciler. Run
+`08584100041781888027680261266CU00` at 06:25 Cairo succeeded in 681 ms:
+source/guard/read succeeded, Create item and read-back verification succeeded.
+Resubmission `08584100041450753355687018443CU25` succeeded in 409 ms:
+create/read-back actions skipped, existing-job verification succeeded and
+rejection skipped. Switched the reconciler Off and verified saved Status Off.
+Independent final queue read showed exactly three jobs: `163-1` Succeeded/
+AttemptCount 2/CompletedRevision 1 and `163-2` Succeeded/AttemptCount 1/
+CompletedRevision 2 unchanged; `163-3` Pending/AttemptCount 0 with blank
+completion, lease, retry and error fields. Leave this new job pending for the
+next guarded COPY-worker test; do not reset or delete earlier receipts.
+No Excel/email actions or worker execution; app still unpublished. General
+paginated reconciliation and interrupted-Running-job recovery remain undeployed.
+
+## Reconciliation pilot — completed-job replay passed, 10 October 2026
+
+Temporarily enabled only the new synthetic reconciler and ran it manually.
+Run `08584100048317492025223131698CU08`, at 06:14 Cairo, succeeded in 906 ms.
+Live action history verified source GET and identity guard succeeded, existing
+job read succeeded, Create item/Get items/new-job Condition skipped, existing
+job verification succeeded, and rejection skipped. This proves the no-write
+completed-receipt branch, not missing-job creation or general reconciliation.
+Switched the reconciler Off and independently verified saved Status Off.
+Post-test SharePoint queue contained exactly the unchanged completed jobs:
+`163-1` AttemptCount 2/CompletedRevision 1 and `163-2` AttemptCount 1/
+CompletedRevision 2; both Succeeded, with blank lease/retry/error fields.
+No Excel/email actions were executed; worker and production sync remained Off.
+The app remains unpublished. Missing-event creation/replay, paginated production
+sweeps and exact-run interrupted-worker recovery remain pending.
+
+### Import evidence
+
+Created a separate synthetic-only flow by importing a package as Create as new
+with an existing ahmed.adel SharePoint connection. Portal confirmed all resources
+successfully imported and created flow ID
+`6584b40f-bfcd-4b31-b929-667e2cc96dc4`, display name
+`ReconcileSalesReporting_Pilot_NoEmail_20261010`. The existing enqueue/worker and
+production definitions were not edited. Future recurrence start is
+2040-10-10T00:00:00Z, concurrency 1. Pilot GET reads only opportunity ID 163,
+guards exact stable key and positive Revision, then checks latest queue Title.
+Existing valid receipts are verified but never reset; only a successful empty
+read permits creation, followed by read-back on create success/failure/timeout.
+There are no Excel/email actions. Imported designer checker showed 0 errors and
+0 warnings; details independently showed saved Status Off and no run history.
+The subsequent completed-receipt replay is recorded above.
+
+Accepted package: ReconcileSalesReporting_Pilot_NoEmail_20261010_v3.zip,
+SHA-256 33846f3a30c844559359d0ebe3a397e064ac503bdcf71fd32d9807c5bca1c93d.
+14 offline package audits pass. v1/v2 were rejected before flow creation with
+MalformedFlowAssetFlowDefinition: builder renamed an action key using a blanket
+replacement which also changed its Terminate type. Corrected key-only rename,
+added type-regression audit, and v3 imported successfully. Retain earlier ZIPs
+as failed-build evidence, never use them for deployment. Local policy tests alone
+are not live acceptance. This pilot is not a general paginated reconciler or an
+interrupted-Running-job recovery flow.
+
+## Authorized pause completed — 10 October 2026
+
+After the user's approval, switched both test pilots Off and verified saved
+Status Off independently on each details page: worker
+`5998de92-8e3a-47a2-b434-a71a9f4f1829` and enqueue
+`82499d0a-4068-4be6-9eee-5d1074701e45`. Both turn-off operations completed after
+asynchronous UI processing. No definition, workbook, queue, email, connection,
+permissions or app publication was changed. This supersedes the On discrepancy
+below, without changing the definitions that were modified since the prior test.
+
+Added offline missed-event reconciliation policy, 26 passing tests and a detailed
+enqueue-only flow contract in `reporting-reconciliation.md`. Existing recovery
+policy still passes 39 tests. These are staged implementation references, not
+deployed production recovery/reconciliation flows. The synthetic pilot is now
+deployed with completed-job replay verified above; next verify missing-event
+creation/replay and establish a
+solution-aware exact-run proof source before any automatic Running-job reclaim.
+
+## Live-state discrepancy — 10 October 2026 follow-up
+
+Read-only follow-up found both pilots On, superseding their earlier Off
+checkpoint: enqueue modified 05:37 Cairo and worker modified 05:38 Cairo.
+Worker has a newer successful run at 05:42:51,
+`08584100067143274294810253452CU28` (323 ms in history). No action payloads or
+password-bearing script cards were opened. This run's overall success is not
+new Excel-commit evidence. No flow status, definition, queue or workbook was
+changed during this follow-up. Await user direction before pausing or editing
+the active pilots; do not overwrite changes made since the checkpoint.
+
+Production SyncSalesReporting was independently visible Off in the Sales
+Production Optimization solution. That solution lists CreateOpportunity,
+UpdateOpportunity and SyncSalesReporting only (3 flows). The worker and enqueue
+pilots were listed under Add existing > Automation > Cloud flow > Outside
+Dataverse; the dialog was cancelled without adding anything. The worker thus
+cannot yet be assumed to have Dataverse FlowRun metadata. Automatic recovery
+remains undeployed. Microsoft's documented FlowRun source requires solution
+flows; ingestion/read access/retention and exact-run terminal proof still need
+verification. Missing run metadata must fail closed.
+
+## Latest checkpoint — 10 October 2026: revision-2 COPY sync passed
+
+Temporarily enabled only the guarded no-email COPY worker and resubmitted its
+recurrence run. Run `08584100078210717914290151572CU03` at 05:24:24 Cairo
+succeeded in 15 seconds. Worker switched Off and saved Status Off verified.
+Independent queue read: exactly `163-1` Succeeded/AttemptCount 2/CompletedRevision
+1 (unchanged) and `163-2` Succeeded/AttemptCount 1/CompletedRevision 2; lease,
+retry-time and error fields blank. Production sync remains Off; no email or
+app publication. Existing read-only CompareWorkbookContract returned actual
+Output JSON `{"status":"pass","differenceCount":0,"differences":[]}` against
+the unchanged approved baseline (10,099 characters, FNV-1a 1,754,044,479).
+Captured structure/protection passed; full visual/report refresh and business
+reconciliation remain open. Interrupted-run recovery and missed-event
+reconciliation are still not deployed. The app remains unpublished.
+Earlier Pending records below are historical enqueue-phase checkpoints.
+
+## Latest checkpoint — 10 October 2026: new-revision enqueue and replay passed
+
+Changed only synthetic opportunity 163 Revision from 1 to 2 directly in
+SharePoint, then its test-only Title after an observed skipped poll. This is
+enqueue-only coverage, not an app/UpdateOpportunity acceptance test. Preserved
+QuoteNo `MSOL2614`, stable key and business values. Only the restricted no-email
+enqueue pilot was temporarily enabled; worker and production reporting were
+verified Off and never enabled.
+
+Run `08584100082109973678351807747CU29` at 05:17 Cairo succeeded in 411 ms:
+Create item succeeded and verification was True. Exact-payload resubmission
+`08584100080660400535660510657CU03` at 05:20 Cairo succeeded in 617 ms:
+duplicate Title creation rejected (HTTP 400), read/verification succeeded True.
+Switched the enqueue pilot Off and verified Status Off. Final live queue read
+showed exactly `163-1` Succeeded/AttemptCount 2/CompletedRevision 1, unchanged,
+and `163-2` Pending/AttemptCount 0 with blank completion/lease/error fields.
+
+No Excel write, email, real-opportunity change, migration or app publication
+occurred. Leave synthetic item 163 at Revision 2 and its new Pending queue job
+for the next controlled reporting-COPY worker test. Full evidence and remaining
+acceptance: `reporting-acceptance-2026-10-10.md`. Automatic interrupted-run
+recovery and missed-event reconciliation are still not deployed.
+
+## Latest checkpoint — 9 October 2026: reporting enqueue duplicate replay passed
+
+Created `EnqueueSalesReporting_Pilot_NoEmail_20261009`, flow ID
+`82499d0a-4068-4be6-9eee-5d1074701e45`. Checker showed 0 errors / 0 warnings.
+The pilot creates a unique per-revision queue job, then verifies exactly one
+matching job even after creation failure/timeout. It never resets an existing
+completed job and contains no Excel/email actions. Trigger is restricted to
+synthetic opportunity 163 and its exact stable ExcelRowKey. Saved state was
+verified Off. Follow-up inspected the full exported definition and confirmed the
+exact synthetic-only restriction (Peek code omits it). Skipped polling checks
+were visible in All runs > Checks (no new data), not normal run history.
+A fresh post-poll synthetic label change produced successful run
+`08584100527814732389539525721CU06`, followed by successful identical-payload
+resubmission `08584100525350168451995794408CU03`. Both rejected duplicate
+queue Title creation, read the existing job, and evaluated verification True.
+Final queue read confirmed exactly one unchanged `163-1` job: Succeeded,
+AttemptCount 2, CompletedRevision 1. Pilot switched back Off and Status Off
+verified. No Excel/email actions were performed; the app remains unpublished.
+
+See `reporting-enqueue-pilot-2026-10-09.md` for actual acceptance evidence and
+final activation state. Offline reporting policy tests now pass 39 checks.
+The exported pilot additionally passes 14 saved-configuration audit checks.
+These do not substitute for live-flow acceptance. Production reporting remains
+Off; the app remains unpublished. Automatic interrupted-run recovery and missed
+event reconciliation are not yet deployed. New-job creation, new-revision
+delivery and queue-failure handling still require live tests; the successful
+completed-job replay does not establish full production acceptance.
+
+## Latest checkpoint — 9 October 2026: reporting COPY contract passed
+
+The browser CompareWorkbookContract initially found 15 column-width differences.
+Created and verified the Saved online backup
+`SalesReporting_COPY_PreWidthRepair_20261009.xlsx`, then staged the narrowly scoped
+`RestoreApprovedReportingWidths_20261009` script on the reporting COPY. The owner
+privately executed it; observed result confirmed 15 widths restored and sheet
+protection enabled/not paused. Re-ran the existing browser comparator with the
+unchanged approved baseline and observed
+`{"status":"pass","differenceCount":0,"differences":[]}`.
+
+Details and limitations: `workbook-contract-live-2026-10-09.md`. This is the
+captured structural contract only, not full visual acceptance or release
+approval. Production reporting synchronization remains intentionally OFF and
+the development app remains unpublished. Interrupted-job recovery,
+enqueue/reconciliation, business-value reconciliation, notification safeguards,
+management visual sign-off, security and six-session performance acceptance
+remain outstanding. Older sections below are historical checkpoints and must
+not be interpreted as current sequence values or current draft-app behavior.
+
 ## Live resources created
 
 - SharePoint site: `https://entrag.sharepoint.com/sites/InsideSalesTeam`

@@ -15,14 +15,26 @@ function timestamp(value) {
 export function jobKey(opportunityId, revision) {
   return `${integer(opportunityId, 'OpportunityId')}-${integer(revision, 'TargetRevision')}`;
 }
-export function canClaim(job, now, priorRunState) {
+export function queueJobConfirmed(rows, opportunityId, revision) {
+  const title = jobKey(opportunityId, revision);
+  // Verification is read-only: a replay must never reset a completed job.
+  return Array.isArray(rows) && rows.length === 1
+    && rows[0]?.Title === title
+    && rows[0]?.OpportunityId === opportunityId
+    && rows[0]?.TargetRevision === revision;
+}
+export function canClaim(job, now, priorRunProof, expectedWorkerFlowId) {
   integer(job.AttemptCount, 'AttemptCount', 0);
   if (job.AttemptCount >= MAX_ATTEMPTS) return false;
   const currentTime = timestamp(now);
   if (job.State === 'Running') {
     // An expired lease does not prove a timed-out Excel request has stopped.
     return Boolean(job.LeaseExpiresAt) && timestamp(job.LeaseExpiresAt) <= currentTime
-      && terminalRunStates.has(priorRunState);
+      && typeof expectedWorkerFlowId === 'string' && expectedWorkerFlowId.length > 0
+      && typeof job.LeaseToken === 'string' && job.LeaseToken.length > 0
+      && priorRunProof?.flowId === expectedWorkerFlowId
+      && priorRunProof?.runId === job.LeaseToken
+      && terminalRunStates.has(priorRunProof?.status);
   }
   if (!['Pending', 'Retry'].includes(job.State)) return false;
   return !job.NextAttemptAt || timestamp(job.NextAttemptAt) <= currentTime;

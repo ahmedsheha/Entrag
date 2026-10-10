@@ -1,5 +1,92 @@
 # Durable reporting recovery
 
+## Current status — 10 October 2026
+
+Latest: imported SharePoint-only manual pilot
+`fb626660-ba00-47bd-ae8a-fdf01dafadb3`, restricted to new synthetic job 163-4.
+21 package checks passed; designer checker zero errors/warnings. Live rejection
+run `08584099585412675192028297477CU03` (19:05 Cairo, 315 ms) parsed the review
+then explicitly rejected it; SharePoint Read queue and Confirm job Skipped.
+Pilot returned Off and verified. This supersedes the undeployed manual-action
+checkpoint below, not positive recovery/ETag conflict/interruption acceptance.
+No Dataverse, Excel/email action or app association exists in the new pilot.
+
+User has rejected paid Dataverse use. Left the incomplete Dataverse probe via
+Back without Save or Sign in; solution independently still contained exactly
+four flows, five connection references and one environment variable. Production
+and COPY reporting workers were both Off. The historical Dataverse adapter below
+is not the deployment route and must not be connected or deployed.
+
+Added `manual-reporting-recovery.mjs` and operator runbook
+`manual-reporting-recovery.md`: no connector calls, operator attestation required,
+exact terminal run, expired lease, quiesced writers and settled Excel execution,
+fresh review within five minutes, exact queue ETag/ownership and no wildcard
+updates. Conditional Retry plan preserves attempts/completion/identity; changed
+snapshots fail closed. 51 offline checks passed, alongside 39 recovery and 26
+reconciliation checks. This is not a deployed recovery action or live interruption
+test. A live read of All Items showed only 163-1, 163-2 and 163-3, all Succeeded,
+attempts 2/1/1 and completed revisions 1/2/3; no receipt was reset or modified.
+Automatic Running-job reclaim stays disabled. Next live work requires a separate
+synthetic interruption fixture and a SharePoint conditional recovery action,
+without touching completed receipts or enabling production.
+
+Later checkpoints supersede the historical revision-2 status below: synthetic
+revision 3 missing-event creation/replay and protected COPY synchronization passed,
+with zero captured workbook-contract differences. All three queue receipts are
+Succeeded. See deployment-state.md for exact runs and remaining acceptance gates.
+
+Added only the disabled COPY queue worker to Sales Production Optimization via
+Add existing > Automation > Cloud flow > Outside Dataverse. Solution now has
+four cloud flows; registration added existing-connection references for SharePoint
+and Content Conversion. No sharing/roles/credentials changed. Worker remains Off
+outside the brief empty-queue monitoring test. New run
+`08584099605707719437455427481CU16` at 18:31:54 Cairo appeared independently in
+Automation Center Run history with the exact worker/run link, Succeeded, 440 ms.
+Its queue claim/condition were Skipped: no Excel call. New-run ingestion is now
+UI-verified; raw connector fields and automated recovery are still unverified.
+
+`flow-run-proof.mjs` is a fail-closed offline adapter for a trusted successful
+Dataverse read: require exactly one record, exact configured workflowid and
+LeaseToken/name, known terminal status, and valid completed start/end timestamps.
+26 tests pass. It never treats no records, failed reads, active/unknown status,
+wrong identities or missing/future end time as permission to reclaim. Returned
+proof omits raw errors and private payloads. It composes with existing expired-
+lease/attempt checks; final fresh queue ETag and lease-ownership checks remain
+required. No automated proof read or recovery write is deployed yet.
+
+Microsoft documents solution-flow and owner-read prerequisites, and incomplete
+FlowRun ingestion. Missing metadata must fail closed, not mean "stopped".
+Sources: https://learn.microsoft.com/en-us/power-automate/dataverse/cloud-flow-run-metadata
+and https://learn.microsoft.com/en-us/power-apps/developer/data-platform/reference/entities/flowrun.
+Actual connector status/identity mapping, owner permissions, storage/retention,
+licensing and exact new-run read must be verified before deploying the adapter.
+
+Follow-up found both pilots re-enabled; after explicit user approval both were
+switched Off and their saved statuses verified again. The later authorization
+and pause are recorded in deployment-state.md. Added a staged missed-event
+reconciler reference and 26 passing offline tests; see reporting-reconciliation.md.
+No live recovery/reconciler deployment is claimed by these tests.
+
+The historical checkpoints below describe incremental implementation, not the
+current deployment. The serialized no-email worker pilot is saved and includes
+the protected reporting-COPY script, ETag claim and completion/retry handling.
+Its live failure/retry/success and completed-job replay were tested on revision 1
+of synthetic item 163; it is Off. Production `SyncSalesReporting` is also Off.
+
+The separate enqueue pilot is saved and passed completed-job duplicate replay
+on 9 October, then new-revision creation and exact-event replay on 10 October.
+It is Off again. See `reporting-acceptance-2026-10-10.md` for run IDs and the
+synthetic source/queue state: item 163 Revision 2. A later controlled COPY-worker
+run synchronized `163-2`: Succeeded, AttemptCount 1, CompletedRevision 2, blank
+lease/retry/error fields. `163-1` stayed unchanged. Worker is Off again; post-write
+captured workbook contract passed with zero differences against the unchanged
+approved baseline. This is isolated COPY acceptance, not a production release.
+Neither enqueue nor its replay sends emails or writes Excel.
+
+Automatic interrupted-run recovery, production missed-event reconciliation,
+notification delivery safeguards and production release acceptance remain
+incomplete. Offline policy tests do not establish these live capabilities.
+
 ## Deployment checkpoint — 2026-10-08
 
 Created the empty `SalesReportingQueue` on InsideSalesTeam, list ID

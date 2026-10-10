@@ -1,22 +1,42 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {jobKey, canClaim, retryPatch, revisionToSync, emailDecision} from './reporting-recovery-policy.mjs';
+import {jobKey, queueJobConfirmed, canClaim, retryPatch, revisionToSync, emailDecision} from './reporting-recovery-policy.mjs';
 let checks = 0;
 function check(name, test) { test(); checks++; console.log(`PASS ${name}`); }
 const now = '2026-10-08T10:00:00Z';
 const pending = {State:'Pending', AttemptCount:0, NextAttemptAt:null};
 check('stable unique event key', () => assert.equal(jobKey(163, 1), '163-1'));
 check('invalid keys rejected', () => assert.throws(() => jobKey(163, 0)));
+const completedQueue = Object.freeze({Title:'163-1', OpportunityId:163,
+  TargetRevision:1, AttemptCount:2, CompletedRevision:1, State:'Succeeded'});
+check('completed duplicate receipt confirmed without mutation', () => {
+  assert.equal(queueJobConfirmed([completedQueue],163,1),true);
+  assert.equal(completedQueue.AttemptCount,2);
+  assert.equal(completedQueue.State,'Succeeded');
+});
+check('missing queue receipt rejected', () => assert.equal(queueJobConfirmed([],163,1),false));
+check('multiple receipts rejected', () => assert.equal(queueJobConfirmed([completedQueue,completedQueue],163,1),false));
+check('wrong queue title rejected', () => assert.equal(queueJobConfirmed([{...completedQueue,Title:'163-2'}],163,1),false));
+check('wrong opportunity rejected', () => assert.equal(queueJobConfirmed([{...completedQueue,OpportunityId:162}],163,1),false));
+check('wrong revision rejected', () => assert.equal(queueJobConfirmed([{...completedQueue,TargetRevision:2}],163,1),false));
+check('invalid connector response rejected', () => assert.equal(queueJobConfirmed(null,163,1),false));
 check('pending job due', () => assert.equal(canClaim(pending, now), true));
 check('future retry not due', () => assert.equal(canClaim({...pending, State:'Retry', NextAttemptAt:'2026-10-08T10:01:00Z'}, now), false));
 check('completed job never replayed', () => assert.equal(canClaim({...pending, State:'Succeeded'}, now), false));
 check('dead letter never automatic', () => assert.equal(canClaim({...pending, State:'DeadLetter'}, now), false));
 check('attempt limit enforced', () => assert.equal(canClaim({...pending, AttemptCount:8}, now), false));
-const expired = {...pending, State:'Running', LeaseExpiresAt:'2026-10-08T09:00:00Z'};
-check('expired active run not reclaimed', () => assert.equal(canClaim(expired, now, 'Running'), false));
+const expired = {...pending, State:'Running', LeaseToken:'pilot-001', LeaseExpiresAt:'2026-10-08T09:00:00Z'};
+const workerFlowId = '5998de92-8e3a-47a2-b434-a71a9f4f1829';
+const proof = {flowId:workerFlowId,runId:'pilot-001',status:'Failed'};
+check('expired active run not reclaimed', () => assert.equal(canClaim(expired, now, {...proof,status:'Running'},workerFlowId), false));
 check('expired unknown run not reclaimed', () => assert.equal(canClaim(expired, now), false));
-check('expired terminal run eligible', () => assert.equal(canClaim(expired, now, 'Failed'), true));
-check('unexpired lease not reclaimed', () => assert.equal(canClaim({...expired, LeaseExpiresAt:'2026-10-08T11:00:00Z'}, now, 'Failed'), false));
+check('expired exact terminal run eligible', () => assert.equal(canClaim(expired, now, proof,workerFlowId), true));
+check('bare terminal status is not proof', () => assert.equal(canClaim(expired, now, 'Failed',workerFlowId), false));
+check('other run cannot authorize recovery', () => assert.equal(canClaim(expired, now, {...proof,runId:'pilot-002'},workerFlowId), false));
+check('other worker cannot authorize recovery', () => assert.equal(canClaim(expired, now, {...proof,flowId:'other-flow'},workerFlowId), false));
+check('missing configured worker blocks recovery', () => assert.equal(canClaim(expired, now, proof), false));
+check('missing lease token blocks recovery', () => assert.equal(canClaim({...expired,LeaseToken:null}, now, proof,workerFlowId), false));
+check('unexpired lease not reclaimed', () => assert.equal(canClaim({...expired, LeaseExpiresAt:'2026-10-08T11:00:00Z'}, now, proof,workerFlowId), false));
 check('retry backoff persisted', () => assert.equal(retryPatch(1, now, 'ExcelFailed', 'pilot-001').NextAttemptAt, '2026-10-08T10:01:00.000Z'));
 check('backoff capped', () => assert.equal(retryPatch(7, now, 'ExcelFailed', 'pilot-001').NextAttemptAt, '2026-10-08T11:00:00.000Z'));
 check('exhaustion dead letters', () => assert.equal(retryPatch(8, now, 'ExcelFailed', 'pilot-001').State, 'DeadLetter'));
