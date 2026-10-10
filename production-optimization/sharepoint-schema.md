@@ -3,6 +3,11 @@
 All lists belong on the approved team site and inherit the site's existing team
 permissions.
 
+The durable recovery queue `SalesReportingQueue` was added on 2026-10-08.
+Its live fields, indexes and deployment limits are recorded in
+[`reporting-recovery.md`](reporting-recovery.md). Queue schema is live; the
+scheduled recovery worker is not yet deployed or enabled.
+
 ## SalesOpportunities
 
 | Display name | Type | Required | Indexed/unique |

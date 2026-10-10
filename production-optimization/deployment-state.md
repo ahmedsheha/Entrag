@@ -241,7 +241,55 @@
   checks 14, comparator checks 15, and package checks 60 pass locally. No
   production activation, notification email or app publication occurred.
 
-1. Completed: support-list columns from `sharepoint-schema.md` are live.
+## Durable reporting queue checkpoint — 2026-10-08
+
+- Created empty SalesReportingQueue on InsideSalesTeam, ID
+  7e7792f9-8896-4e92-b1c6-3e2391140edc. Saved all ten queue fields, required
+  unique Title, and verified five indexes (Title, State, NextAttemptAt,
+  LeaseExpiresAt, OpportunityId). No opportunities or Excel data were changed.
+- Saved State's required flag through classic List Settings and verified the
+  required marker. LastError is multiline plain text with append disabled.
+- Added the offline recovery policy and regression tests; these are not a live
+  worker. Automatic retry after action exhaustion is STILL NOT DEPLOYED.
+  See reporting-recovery.md for actual schema and remaining single-writer build.
+- Site UI still displays Pacific time; Cairo regional configuration remains open.
+  Production reporting was not enabled and the development app was not published.
+- Started UNSAVED native scheduled draft SyncSalesReporting_Queue_Pilot_NoEmail_20261008.
+  Queue read/loop/REST read are entered, but its condition, claim, Excel upsert and
+  retries are not finished. No Excel/email action exists there. Repeated Arc
+  concurrent-change rejections prevented safe continued editing; no flow ID or
+  successful save is claimed. See reporting-recovery.md for exact resume state.
+
+### 2026-10-09 reporting-worker continuation
+
+- Superseded the unsaved draft with saved pilot flow
+  `5998de92-8e3a-47a2-b434-a71a9f4f1829`; verified Off. Saved checkpoint contains
+  due fixture-job selection, fresh queue read, eligibility check and ETag claim.
+  Persisted recurrence concurrency is 1; start time is 2040-10-08T07:00:00Z.
+- No Excel/email action is present yet. Durable retry processing is still not
+  complete or live-tested. Production reporting remains off; app unpublished.
+- Adding latest-opportunity read exposed a broken existing SharePoint connection
+  for ahmed.adel@entrag.com. Undid incomplete action; subsequent Save failed on
+  that connection. Previous successful checkpoint is retained. Connection repair
+  is now prerequisite; see reporting-recovery.md for exact state.
+- The exact connection details subsequently showed Connected, inconsistent with
+  the designer error. No credentials or permissions changed. Native inventory
+  timed out and Arc input reported a paste conflict; reopened the saved pilot URL
+  only after confirming the address. Revalidate connectivity before editing.
+- Offline regression rerun: recovery 27, request/source guards 31, script mock 14,
+  contract comparator 15, notification scenarios 12 (152 migration rows
+  suppressed), all pass. These do not establish live worker acceptance.
+- After owner reconnection, classic designer loaded metadata and successfully
+  saved latest-opportunity Get_item, Html_to_text and safely serialized Compose
+  payload. Eligibility Boolean true confirmed. New designer connection-list
+  initialization remains unreliable; use classic for this pilot.
+- UNSAVED Run_script now targets COPY and approved pilot script, requestJson
+  outputs('Compose'), secure input/output On, bounded exponential retry settings
+  entered. Owner must enter workbook password directly and Save, keeping flow Off.
+  No queue worker acceptance/live Excel run occurred; completion/retry handlers
+  and reconciliation remain open. See reporting-recovery.md before resuming.
+
+1. Completed: original support-list columns from `sharepoint-schema.md` are live.
 2. Completed: the workbook contract was captured, validated, and stored in
    `baselines/management-workbook-baseline.json`. The unchanged pilot workbook
    returned `status=pass`, `differenceCount=0`.
@@ -252,3 +300,19 @@
    as a secure flow value; it is never stored in source or chat.
 7. Wire the optimized Power Fx, run `acceptance.md`, obtain management sign-off,
    then publish.
+# Queue worker live acceptance checkpoint — 2026-10-09
+
+- No-email queue pilot only was enabled temporarily for manual tests and
+  turned off immediately after each start; final Off verified.
+- Source 163 is Revision 1 / MSOL2614 with ExcelRowKey
+  APP-performance-test-20261007-create-recovery-001. Corrected pilot payload
+  guard's missing APP- prefix and verified successful Save.
+- One queue item 163-1: intentional fail-closed attempt recorded Retry;
+  corrected retry ran the protected COPY script successfully and finalized
+  Succeeded / CompletedRevision 1. Independent SharePoint receipt shows
+  AttemptCount 2, cleared next-attempt/lease/error, no duplicate queue item.
+- Completed-job replay succeeded in 310 ms without executing queue-loop
+  actions or invoking Excel. No email action exists in this pilot.
+- Post-write workbook contract, interruption recovery, enqueue/reconciliation,
+  production email, full migration reconciliation and six-user acceptance
+  remain release gates. Production synchronization off; app unpublished.

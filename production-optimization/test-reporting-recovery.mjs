@@ -1,0 +1,38 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {jobKey, canClaim, retryPatch, revisionToSync, emailDecision} from './reporting-recovery-policy.mjs';
+let checks = 0;
+function check(name, test) { test(); checks++; console.log(`PASS ${name}`); }
+const now = '2026-10-08T10:00:00Z';
+const pending = {State:'Pending', AttemptCount:0, NextAttemptAt:null};
+check('stable unique event key', () => assert.equal(jobKey(163, 1), '163-1'));
+check('invalid keys rejected', () => assert.throws(() => jobKey(163, 0)));
+check('pending job due', () => assert.equal(canClaim(pending, now), true));
+check('future retry not due', () => assert.equal(canClaim({...pending, State:'Retry', NextAttemptAt:'2026-10-08T10:01:00Z'}, now), false));
+check('completed job never replayed', () => assert.equal(canClaim({...pending, State:'Succeeded'}, now), false));
+check('dead letter never automatic', () => assert.equal(canClaim({...pending, State:'DeadLetter'}, now), false));
+check('attempt limit enforced', () => assert.equal(canClaim({...pending, AttemptCount:8}, now), false));
+const expired = {...pending, State:'Running', LeaseExpiresAt:'2026-10-08T09:00:00Z'};
+check('expired active run not reclaimed', () => assert.equal(canClaim(expired, now, 'Running'), false));
+check('expired unknown run not reclaimed', () => assert.equal(canClaim(expired, now), false));
+check('expired terminal run eligible', () => assert.equal(canClaim(expired, now, 'Failed'), true));
+check('unexpired lease not reclaimed', () => assert.equal(canClaim({...expired, LeaseExpiresAt:'2026-10-08T11:00:00Z'}, now, 'Failed'), false));
+check('retry backoff persisted', () => assert.equal(retryPatch(1, now, 'ExcelFailed', 'pilot-001').NextAttemptAt, '2026-10-08T10:01:00.000Z'));
+check('backoff capped', () => assert.equal(retryPatch(7, now, 'ExcelFailed', 'pilot-001').NextAttemptAt, '2026-10-08T11:00:00.000Z'));
+check('exhaustion dead letters', () => assert.equal(retryPatch(8, now, 'ExcelFailed', 'pilot-001').State, 'DeadLetter'));
+check('unsafe connector error rejected', () => assert.throws(() => retryPatch(1, now, '{password:secret}', 'pilot-001')));
+check('latest revision for older event', () => assert.equal(revisionToSync(1, 3), 3));
+check('source behind event blocks', () => assert.throws(() => revisionToSync(3, 2)));
+const create = {targetRevision:1, requestId:'app-create-001', receiptStatus:'Missing'};
+check('create requires durable email reservation', () => assert.equal(emailDecision(create), 'ReserveBeforeSend'));
+check('older create retains notification eligibility', () => { revisionToSync(1, 3); assert.equal(emailDecision(create), 'ReserveBeforeSend'); });
+check('update sends no notification', () => assert.equal(emailDecision({...create, targetRevision:2}), 'NotApplicable'));
+for (const receiptStatus of ['Sending','Unknown']) check(`${receiptStatus} never auto resent`, () => assert.equal(emailDecision({...create, receiptStatus}), 'ReviewRequired'));
+check('successful email never resent', () => assert.equal(emailDecision({...create, receiptStatus:'Succeeded'}), 'AlreadySent'));
+for (const requestId of ['migration-001','MIGRATION:legacy-001','performance-test-001']) check(`${requestId} suppressed`, () => assert.equal(emailDecision({...create, requestId}), 'NotApplicable'));
+const migration = JSON.parse(await readFile(new URL('./migration/sales-opportunities.json', import.meta.url), 'utf8'));
+check('all 152 prepared migration emails suppressed', () => {
+  assert.equal(migration.records.length, 152);
+  for (const row of migration.records) assert.equal(emailDecision({...create, requestId:row.ClientRequestId}), 'NotApplicable');
+});
+console.log(`${checks} reporting recovery policy checks passed (offline, not live-flow acceptance).`);
